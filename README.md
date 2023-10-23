@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextCash - Estudo de Desenvolvimento Full Stack com Next.js
 
-## Getting Started
+Bem-vindo ao projeto NextCash!
 
-First, run the development server:
+## Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+O NextCash é um projeto dedicado ao estudo do desenvolvimento Full Stack utilizando a tecnologia Next.js. Este projeto tem como objetivo explorar e aprender sobre o desenvolvimento web, abrangendo tanto o lado do cliente (frontend) quanto o lado do servidor (backend).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Neste projeto, estamos utilizando diversas tecnologias de ponta, incluindo:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Next.js:** Um framework React de código aberto que facilita a criação de aplicativos web modernos, oferecendo uma experiência de desenvolvimento ágil.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **React:** Uma biblioteca JavaScript para construção de interfaces de usuário interativas e reativas.
 
-## Learn More
+- **Node.js:** Um ambiente de tempo de execução JavaScript que permite a construção de aplicativos de servidor altamente escaláveis.
 
-To learn more about Next.js, take a look at the following resources:
+- **Express:** Um framework de aplicativo da web para Node.js que simplifica o desenvolvimento de aplicativos do lado do servidor.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Banco de Dados:** Utilizamos um banco de dados [especifique o banco de dados que está sendo usado] para armazenar e gerenciar os dados do aplicativo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Como Usar
 
-## Deploy on Vercel
+Para começar a trabalhar com o projeto NextCash, siga estas etapas:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone este repositório em sua máquina local.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+2. Instale as dependências do projeto.
+
+
+3. Inicie o servidor de desenvolvimento.
+
+
+
+Agora você pode acessar o aplicativo em `http://localhost:3000` e começar a explorar e desenvolver com o NextCash.
+
+## Contribuições
+
+Aceitamos contribuições! Se você deseja contribuir para o projeto, fique à vontade para abrir issues, enviar pull requests ou entrar em contato com a equipe de desenvolvimento.
+
+## Licença
+
+Este projeto é distribuído sob a licença [especifique a licença usada no projeto]. Veja o arquivo [LICENSE](LICENSE) para obter mais detalhes.
+
+---
+
+Este README é um guia básico para começar com o projeto NextCash. Sinta-se à vontade para personalizá-lo e adicionar mais informações específicas ao seu projeto. 
+
+Novidades a caminho s2 

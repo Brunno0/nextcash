@@ -1,0 +1,21 @@
+.card {
+    background-color: aliceblue;
+    min-width: 400px;
+
+    padding: 2em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    text-align: center;
+}
+
+/* Media query para telas menores que 768px */
+@media screen and (max-width: 768px) {
+    .card {
+        padding: 1em; /* Ajuste o padding para tamanhos de tela menores */
+        min-width: 90%;
+    }
+}
