@@ -7,6 +7,7 @@ import Link from "next/link"
 
 export default function LoginPage() {
 
+
     return (<div className={styles.background}>
 
         <LoginCard title={"Entre na sua conta"}>
