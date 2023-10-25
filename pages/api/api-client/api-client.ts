@@ -1,23 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export async function cadastrarUsuario(dados: any) {
+export async function signup(data: any) {
   try {
     const response = await fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(dados),
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {
-      throw new Error(`Erro na solicitação: ${response.status}`);
+      console.error(response);
+      throw new Error(`Request error: ${response.status}`);
     }
 
     return await response.json();
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error(error.message);
   }
 }
 
-// Outros métodos de API podem ser definidos aqui, da mesma forma
