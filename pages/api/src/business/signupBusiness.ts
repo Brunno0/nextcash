@@ -1,15 +1,18 @@
-// src/business/SignupBusiness.ts
-
-
 import SignupDatabase from '../database/signupDatabase';
-import UserModel from '../models/UserModel';
+import { SignupInputDTO } from '../dtos/signup.dto';
+import UserModel, { USER_ROLES } from '../models/UserModel';
 
 export default class SignupBusiness {
   constructor(private signupDatabase: SignupDatabase) {}
 
-  async signup(nome: string, email: string, senha: string): Promise<UserModel> {
-    // Lógica de negócios para criar um usuário
-    const user = new UserModel(nome, email, senha);
-    return this.signupDatabase.salvarUsuario(user);
+  async signup(input: SignupInputDTO): Promise<UserModel> {
+    // Business logic to create a user
+    const { name, email, password } = input;
+    const id = Date.now().toString()
+    const createdAt = Date.now().toString()
+    const role = USER_ROLES.NORMAL
+
+    const user = new UserModel(id,name, email, password,role, createdAt);
+    return this.signupDatabase.saveUser(user);
   }
 }
