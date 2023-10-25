@@ -21,7 +21,8 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-     await signup(formData);
+   
+     console.log(await signup(formData))
     } catch (error) {
       console.error(error);
     }

@@ -1,18 +1,37 @@
 import SignupDatabase from '../database/signupDatabase';
 import { SignupInputDTO } from '../dtos/signup.dto';
-import UserModel, { USER_ROLES } from '../models/UserModel';
+import UserModel, { USER_ROLES, UserDB } from '../models/UserModel';
+import { IdGenerator } from '../services/IdGenerator';
 
 export default class SignupBusiness {
-  constructor(private signupDatabase: SignupDatabase) {}
+  constructor(
+    private signupDatabase: SignupDatabase,
+    private idGenerator: IdGenerator
+    ) {}
 
-  async signup(input: SignupInputDTO): Promise<UserModel> {
-    // Business logic to create a user
+  public signup = async (
+    input: SignupInputDTO
+    ):Promise<UserModel> => {
+
     const { name, email, password } = input;
-    const id = Date.now().toString()
-    const createdAt = Date.now().toString()
-    const role = USER_ROLES.NORMAL
 
-    const user = new UserModel(id,name, email, password,role, createdAt);
-    return this.signupDatabase.saveUser(user);
+    const id = this.idGenerator.generate()
+    const createdAt = new Date().toISOString()
+
+    const user = new UserModel(
+      id,
+      name, 
+      email, 
+      password,
+      USER_ROLES.NORMAL,
+      createdAt
+      );
+    
+      const userDB = user.toDBModel()
+     
+      const output = await this.signupDatabase.saveUser(userDB);
+           
+      return output
+     
   }
 }

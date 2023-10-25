@@ -1,4 +1,6 @@
-export async function signup(data: any) {
+
+
+export async function signup(data) {
   try {
     const response = await fetch('/api/signup', {
       method: 'POST',
@@ -14,7 +16,7 @@ export async function signup(data: any) {
     }
 
     return await response.json();
-  } catch (error: any) {
+  } catch (error) {
     console.error(error.message);
   }
 }

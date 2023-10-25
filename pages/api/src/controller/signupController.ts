@@ -15,12 +15,12 @@ export default class SignupController {
       });
         
       const user = await this.signupBusiness.signup(input);
-      res.status(201).json(user);
+      res.status(201).send(user);
     } catch (error: any) {
       if (error instanceof ZodError) {
         res.status(400).send(error.issues);
       }
-      res.status(500).json({ error: 'Error while processing the request', details: error.message });
+      res.status(500).json({ error: 'Internal error', details: error.message });
     }
   }
 }
