@@ -1,12 +1,14 @@
 import SignupDatabase from '../database/signupDatabase';
 import { SignupInputDTO } from '../dtos/signup.dto';
 import UserModel, { USER_ROLES, UserDB } from '../models/UserModel';
+import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
 
 export default class SignupBusiness {
   constructor(
     private signupDatabase: SignupDatabase,
-    private idGenerator: IdGenerator
+    private idGenerator: IdGenerator,
+    private hashManager : HashManager
     ) {}
 
   public signup = async (
@@ -15,14 +17,17 @@ export default class SignupBusiness {
 
     const { name, email, password } = input;
 
+
     const id = this.idGenerator.generate()
     const createdAt = new Date().toISOString()
+    const hashedPass = await this.hashManager.hash(password)
+    console.log(hashedPass)
 
     const user = new UserModel(
       id,
       name, 
       email, 
-      password,
+      hashedPass,
       USER_ROLES.NORMAL,
       createdAt
       );

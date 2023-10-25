@@ -12,7 +12,7 @@ export default class SignupDatabase {
         user.role,
         user.created_at
        )
-       
+     
     return userModel;
   }
 }
