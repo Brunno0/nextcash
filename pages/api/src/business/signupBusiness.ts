@@ -1,27 +1,29 @@
-import SignupDatabase from '../database/signupDatabase';
-import { SignupInputDTO } from '../dtos/signup.dto';
+import { UserDatabase } from '../database/UserDataBase';
+import { SignupInputDTO, SignupOutputDTO } from '../dtos/signup.dto';
+import { ConflictError } from '../errors/ConflictError';
 import UserModel, { USER_ROLES, UserDB } from '../models/UserModel';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
 
 export default class SignupBusiness {
   constructor(
-    private signupDatabase: SignupDatabase,
+    private userDataBase: UserDatabase,
     private idGenerator: IdGenerator,
     private hashManager : HashManager
     ) {}
 
   public signup = async (
     input: SignupInputDTO
-    ):Promise<UserModel> => {
+    ):Promise<SignupOutputDTO> => {
 
     const { name, email, password } = input;
 
-
+    const emailExist = await this.userDataBase.findUserByEmail(email)
+      if(emailExist){
+        throw new ConflictError()
+      }
     const id = this.idGenerator.generate()
-    const createdAt = new Date().toISOString()
     const hashedPass = await this.hashManager.hash(password)
-    console.log(hashedPass)
 
     const user = new UserModel(
       id,
@@ -29,13 +31,17 @@ export default class SignupBusiness {
       email, 
       hashedPass,
       USER_ROLES.NORMAL,
-      createdAt
+      new Date().toISOString()
       );
     
       const userDB = user.toDBModel()
      
-      const output = await this.signupDatabase.saveUser(userDB);
-           
+      await this.userDataBase.saveUser(userDB);
+      const output:SignupOutputDTO = {
+        token: "token-mock"
+      }
+      
+
       return output
      
   }

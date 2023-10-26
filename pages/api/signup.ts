@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import SignupBusiness from './src/business/signupBusiness';
 import SignupController from './src/controller/signupController';
-import SignupDatabase from './src/database/signupDatabase';
 import { IdGenerator } from './src/services/IdGenerator';
 import { HashManager } from './src/services/HashManager';
-
+import { UserDatabase } from './src/database/UserDataBase';
 
 const signupController = 
 new SignupController(
     new SignupBusiness(
-        new SignupDatabase(),
+        new UserDatabase(),
         new IdGenerator(),
-        new HashManager
+        new HashManager()
     ));
 
     const signup = (req: NextApiRequest, res: NextApiResponse) => {

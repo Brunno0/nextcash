@@ -1,4 +1,4 @@
-
+import { ConflictError } from "../src/errors/ConflictError";
 
 export async function signup(data) {
   try {
@@ -11,8 +11,11 @@ export async function signup(data) {
     });
 
     if (!response.ok) {
-      console.error(response);
-      throw new Error(`Request error: ${response.status}`);
+      if (response.status === 409) {
+        throw new ConflictError("Conflito de recurso. Email já cadastrado");
+      } else {
+        throw new Error(`Request error. Status(${response.status}) ${response.statusText}`);
+      }
     }
 
     return await response.json();
@@ -20,4 +23,3 @@ export async function signup(data) {
     console.error(error.message);
   }
 }
-
