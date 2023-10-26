@@ -12,6 +12,8 @@ export default function Signup() {
     password: '',
   });
 
+  const users = []
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -21,7 +23,10 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-     await signup(formData);
+   
+     const newUser = await signup(formData)
+     users.push(newUser)
+     console.table(users)
     } catch (error) {
       console.error(error);
     }
