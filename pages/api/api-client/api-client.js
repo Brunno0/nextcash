@@ -23,3 +23,23 @@ export async function signup(data) {
     console.error(error.message);
   }
 }
+
+export async function getUsers(token) {
+  try {
+    const response = await fetch('/api/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`       
+      }
+     });
+
+     if (!response.ok) {
+              throw new Error(`Request error. Status(${response.status}) ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+

@@ -22,4 +22,11 @@ export class UserDatabase extends BaseDatabase {
 
     return userDB as UserDB | undefined
   }
+
+  public getUsers =async():Promise<UserDB[]> => {
+    const users = 
+    await BaseDatabase.connection(UserDatabase.TABLE_USERS).select() 
+    return users 
+  }
+
 }
