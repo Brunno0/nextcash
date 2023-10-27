@@ -38,4 +38,7 @@ next-env.d.ts
 
 # Banco de Dados
 *.db
+<<<<<<< HEAD
 >>>>>>> bc69926136510fd4472b058b76b2c3b33d5dec0e
+=======
+>>>>>>> database
