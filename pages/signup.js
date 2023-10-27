@@ -3,7 +3,7 @@ import Button from '../components/button/button';
 import Input from '../components/input/input';
 import LoginCard from '../components/loginCard/loginCard';
 import { useState } from 'react';
-import { signup } from './api/api-client/api-client';
+import { getUsers, signup } from './api/api-client/api-client';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ export default function Signup() {
     email: '',
     password: '',
   });
+
+  const users = []
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +23,18 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-     await signup(formData);
+
+      await signup(formData)
+      
+      const token = 'token-mock';
+      await getUsers(token)
+        .then(data => {
+          console.table(data.users)
+        })
+        .catch(error => {
+          console.error(error.message);
+        });
+
     } catch (error) {
       console.error(error);
     }
