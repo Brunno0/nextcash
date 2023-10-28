@@ -2,39 +2,23 @@ import styles from '../styles/Login.module.css';
 import Button from '../components/button/button';
 import Input from '../components/input/input';
 import LoginCard from '../components/loginCard/loginCard';
-import { useState } from 'react';
-import { getUsers, signup } from './api/api-client/api-client';
+import { useForm } from '../hooks/useForm'
+import { signup } from './api/api-client/api-client';
 
 export default function Signup() {
-  const [formData, setFormData] = useState({
+  const { form, onChange, cleanFields } = useForm({
     name: '',
     email: '',
     password: '',
   });
 
-  const users = []
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-
-      await signup(formData)
-      
-      const token = 'token-mock';
-      await getUsers(token)
-        .then(data => {
-          console.table(data.users)
-        })
-        .catch(error => {
-          console.error(error.message);
-        });
-
+      const token = await signup(form); // Use o objeto form diretamente
+      console.log(token);
+      cleanFields(); // Limpe os campos do formulário
     } catch (error) {
       console.error(error);
     }
@@ -48,24 +32,24 @@ export default function Signup() {
             type="text"
             placeholder="your full name"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
+            value={form.name}
+            onChange={onChange}
           />
 
           <Input
             type="email"
             placeholder="enter your email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={form.email}
+            onChange={onChange} 
           />
 
           <Input
             type="password"
             placeholder="enter your password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={form.password}
+            onChange={onChange} 
           />
           <Button type="submit">Submit</Button>
         </form>

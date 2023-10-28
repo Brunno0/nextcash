@@ -4,23 +4,25 @@ import { HashManager } from './src/services/HashManager';
 import { UserDatabase } from './src/database/UserDataBase';
 import UserBusiness from './src/business/UserBusiness';
 import UserController from './src/controller/UserController';
+import { TokenManager } from './src/services/TokenManager';
 
 const userController = new UserController(
   new UserBusiness(
     new UserDatabase(),
     new IdGenerator(),
-    new HashManager()
+    new HashManager(),
+    new TokenManager
   )
 );
 //simulando router
 const users = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("chegou")
+
   if (req.method === 'GET') {
     return userController.getUsers(req, res);
   } else if (req.method === 'POST') {
-    console.log ("USER/post")
+    console.log ("USERs/post")
   } else if (req.method === 'PUT') {
-    console.log("USER/PUTS")
+    console.log("USERs/PUTS")
   } else {
     res.status(405).end('Method not allowed');
   }
