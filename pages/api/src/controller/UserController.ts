@@ -18,8 +18,10 @@ export default class UserController {
       });
 
       const output = await this.userBusiness.signup(input);
+     
+      await this.userBusiness.createAccount(input)
       res.status(201).send( output );
-
+      
     } catch (error: any) {
 
       if (error instanceof ZodError) {
