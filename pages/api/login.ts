@@ -5,6 +5,7 @@ import UserBusiness from './src/business/UserBusiness';
 import { UserDatabase } from './src/database/UserDataBase';
 import { IdGenerator } from './src/services/IdGenerator';
 import { HashManager } from './src/services/HashManager';
+import { AccountDataBase } from './src/database/AccountDataBase';
 
 const userController = 
 new UserController(
@@ -12,7 +13,8 @@ new UserController(
         new UserDatabase(),
         new IdGenerator(),
         new HashManager(),
-        new TokenManager()
+        new TokenManager(),
+        new AccountDataBase()
     ));
 
 

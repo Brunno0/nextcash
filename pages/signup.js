@@ -4,8 +4,11 @@ import Input from '../components/input/input';
 import LoginCard from '../components/loginCard/loginCard';
 import { useForm } from '../hooks/useForm'
 import { signup } from './api/api-client/api-client';
+import { useRouter } from 'next/navigation'
 
 export default function Signup() {
+  const router = useRouter()
+  
   const { form, onChange, cleanFields } = useForm({
     name: '',
     email: '',
@@ -16,11 +19,17 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const token = await signup(form); // Use o objeto form diretamente
-      console.log(token);
-      cleanFields(); // Limpe os campos do formulário
+      const response = await signup(form); 
+      if (response.token){
+      localStorage.setItem('token',response.token)
+      cleanFields(); 
+      alert('Cadastro realizado com sucesso')
+      router.push('/home')
+      }else{
+        alert(response)
+      } 
     } catch (error) {
-      console.error(error);
+     // console.error(error);
     }
   }
 

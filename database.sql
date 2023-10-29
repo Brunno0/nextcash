@@ -16,6 +16,8 @@ CREATE TABLE accounts (
     balance FLOAT NOT NULL
 );
 
+SELECT * FROM accounts;
+
 CREATE TABLE transactions (
    id TEXT PRIMARY KEY UNIQUE NOT NULL,
    debitedAccountId TEXT NOT NULL,

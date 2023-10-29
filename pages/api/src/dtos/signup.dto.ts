@@ -10,8 +10,19 @@ export interface SignupOutputDTO {
   token: string,
 }
 
+
 export const SignupSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(4)
-}).transform(data => data as SignupInputDTO)
+  name: z.string()
+    .min(2, {
+      message: "O nome deve conter pelo menos 2 caracteres",
+    }),
+  email: z.string()
+    .email({
+      message: "O e-mail deve seguir o padrão: 'usuario@email.com'",
+    }),
+  password: z.string()
+    .min(4, {
+      message: "A senha deve conter pelo menos 4 caracteres",
+    }),
+}).transform(data => data as SignupInputDTO);
+

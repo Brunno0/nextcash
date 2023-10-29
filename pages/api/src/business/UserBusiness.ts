@@ -9,6 +9,8 @@ import UserModel, { USER_ROLES, UserDB } from '../models/UserModel';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
 import { TokenManager } from '../services/TokenManager';
+import  {AccountDataBase} from '../database/AccountDataBase'
+import { AccountOutputDTO } from '../dtos/account.dto';
 
 export default class UserBusiness {
   constructor(
@@ -16,6 +18,7 @@ export default class UserBusiness {
     private idGenerator: IdGenerator,
     private hashManager : HashManager,
     private tokenManager: TokenManager,
+    private accountDataBase: AccountDataBase
     ) {}
 
   public signup = async (
@@ -23,11 +26,12 @@ export default class UserBusiness {
     ):Promise<SignupOutputDTO> => {
 
     const { name, email, password } = input;
-
+   
     const emailExist = await this.userDataBase.findUserByEmail(email)
       if(emailExist){
         throw new ConflictError("Email já cadastrado")
       }
+  
     const id = this.idGenerator.generate()
     const hashedPass = await this.hashManager.hash(password)
 
@@ -125,5 +129,19 @@ public login = async(
       token
       }  
     return output
-  }
+}
+public createAccount = async (
+  input: SignupInputDTO):Promise<void>   => {
+
+    const {email} = input
+    const userDB = await this.userDataBase.findUserByEmail(email)
+    if (!userDB) {
+      throw new Error('Usuário não cadastrado, consulte servidor')
+    }    
+    const accountData :AccountOutputDTO = {
+      id : userDB.id,
+      balance : 20
+    }
+   await this.accountDataBase.createAccount(accountData)
+}
 }

@@ -1,4 +1,3 @@
-import { ConflictError } from "../src/errors/ConflictError";
 
 export async function signup(data) {
   const response = await fetch('/api/signup', {
@@ -8,12 +7,11 @@ export async function signup(data) {
     },
     body: JSON.stringify(data),
   });
-
+  const responseBody = await response.json();
   if (!response.ok) {
-    const responseBody = await response.json();
-    return (`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
+    return (`Request error. Status(${response.status}) ${response.statusText} \n[${responseBody.error}]`);
     }
-   const responseBody = await response.json();
+   //const responseBody = await response.json();
   localStorage.setItem('token', responseBody.token);
 
   return responseBody;
