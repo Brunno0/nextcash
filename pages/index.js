@@ -1,8 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Navbar from '../components/Navbar'; // Importe o componente Navbar
+import styles from '../styles/Home.module.css';
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +14,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* Adicione a barra de navegação aqui */}
+      <Navbar />
+
       <div>Home</div>
     </div>
-  )
+  );
 }

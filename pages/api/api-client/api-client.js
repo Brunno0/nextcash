@@ -49,8 +49,8 @@ export async function login(data) {
   const responseBody = await response.json();
 
   if (!response.ok) {
-    throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
-}
+    throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.error}]`);
+    }
   localStorage.setItem('token', responseBody.token);
 
   return responseBody.token;

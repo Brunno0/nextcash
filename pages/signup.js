@@ -29,7 +29,7 @@ export default function Signup() {
         alert(response)
       } 
     } catch (error) {
-     // console.error(error);
+      alert(error)
     }
   }
 

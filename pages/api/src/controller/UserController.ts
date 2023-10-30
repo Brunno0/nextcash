@@ -80,23 +80,22 @@ export default class UserController {
         password: req.body.password as string
       })
 
-      const response = await this.userBusiness.login(input)
+      const output = await this.userBusiness.login(input)
 
-      res.status(200).send(response)
+      res.status(200).json(output)
 
     } catch (error: any) {
 
       if (error instanceof ZodError) {
-        res.status(400).send(error.issues);
-      } else if (error instanceof BaseError) {
-        console.log(error.message)
-        res.status(error.statusCode).send({
-          error: error.message,
-          details: error.message
+        return res.status(400).send({
+          error: error.issues[0].message,
+          statusCode: 400
         })
+      } else if (error instanceof BaseError) {
+        return res.status(error.statusCode).json({ error: error.message })
       } else {
 
-        res.status(500).json({
+        return res.status(500).json({
           error: 'Internal error',
           details: error.message
         });

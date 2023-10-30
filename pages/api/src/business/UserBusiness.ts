@@ -126,7 +126,7 @@ public login = async(
   
     const token = this.tokenManager.createToken(payload)
     const output : LoginUserOutputDTO= {
-      token
+     token:token
       }  
     return output
 }

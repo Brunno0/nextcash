@@ -9,38 +9,43 @@ import { login } from "./api/api-client/api-client";
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
- 
+
   const router = useRouter()
   const { form, onChange, cleanFields } = useForm({
     email: '',
     password: '',
   });
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
-      const token = await login(form); 
-      localStorage.setItem('token', token)
-      cleanFields(); 
-      router.push('/home');
+      const response = await login(form);
+      if (response) {
+        localStorage.setItem('token', response)
+        cleanFields();
+        router.push('/home')
+      }
+      else {
+        console.log(response)
+      }
     } catch (error) {
-      console.error(error);
+      alert(error)
     }
   }
-  
+
+
 
 
   return (
     <div className={styles.background}>
       <LoginCard title={"Log into your account"}>
         <form className={styles.form} onSubmit={handleSubmit}>
-        <Input
+          <Input
             type="email"
             placeholder="enter your email"
             name="email"
             value={form.email}
-            onChange={onChange} 
+            onChange={onChange}
           />
 
           <Input
@@ -48,7 +53,7 @@ export default function LoginPage() {
             placeholder="enter your password"
             name="password"
             value={form.password}
-            onChange={onChange} 
+            onChange={onChange}
           />
           <Button type="submit">Login</Button>
           <Link href="/signup">
