@@ -1,5 +1,4 @@
 import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from "../dtos/account.dto";
-import  Account from "../models/AccountModel";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class AccountDataBase extends BaseDatabase {

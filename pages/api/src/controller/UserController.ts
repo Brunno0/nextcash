@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ZodError } from "zod";
 import { BaseError } from '../errors/BaseError';
 import UserBusiness from '../business/UserBusiness';
-import AccountBusiness from '../business/AccountBusiness'
+
 import { GetUsersSchema } from '../dtos/getUsers.dto';
 import { SignupSchema } from '../dtos/signup.dto';
 import { LoginUserShema } from '../dtos/login.dto';
