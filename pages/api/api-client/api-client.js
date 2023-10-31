@@ -27,11 +27,11 @@ export async function getUsers(token) {
         'Authorization': `Bearer ${token}`       
       }
      });
-    
+     const responseBody = await response.json();
      if (!response.ok) {
       throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
   }
-    return await response.json();
+     return responseBody;
   } catch (error) {
     console.error(error.message);
   }
@@ -57,3 +57,43 @@ export async function login(data) {
 }
 
 
+
+export async function getAccountById(token) {
+  try {
+    const response = await fetch(`/api/getAccountById`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
+    }
+
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+
+export async function getUserById(token) {
+  try {
+    const response = await fetch(`/api/getUserById`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
+    }
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}

@@ -1,26 +1,50 @@
 import Navbar from '../components/nav/Navbar';
-import CardHome from '../components/cardHome/CardHome'; // Importe o componente CardHome
-//import Footer from '../components/Footer'; // Supondo que você tenha um componente Footer
+import CardHome from '../components/cardHome/CardHome'; 
 import styles from '../styles/Home.module.css';
 import { useProtectPage } from '../hooks/useProtectPage';
-import Transactions from '../components/transitions/Transactions';
+import Transactions from '../components/transactions/Transactions';
+import { useEffect, useState } from 'react';
+import { getAccountById, getUserById } from './api/api-client/api-client';
+import { FaTruckLoading } from 'react-icons/fa';
 
 export default function Home() {
   useProtectPage();
 
-  const dataMock = {
-    account: "nx: 50423-1",
-    name: "Astrovengo Malabares",
-    balance: 20,
+ const [account, setAccount] = useState({})
+ const [user, setUser] = useState({})
+
+ useEffect(() => {
+  const fetchData = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        console.log("tem token")
+        const accountApiResponse = await getAccountById(token);
+        setAccount( accountApiResponse.account )
+      
+        
+        const userApiResponse = await getUserById(token);
+        setUser(userApiResponse.user)
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
+
+  fetchData();
+}, []);
 
   return (
     <>
-      <Navbar user={dataMock} />
+     {(user && account)?  <>
+      <Navbar user={user} account={account} />
       <div className={styles.background}>
-        <CardHome user={dataMock} />
-        <Transactions user={dataMock} />
+        <CardHome account={account}/>
+        <Transactions user={user}  account={account}/>
       </div>
+    </>:(<FaTruckLoading/>)}
+     
     </>
   );
 }

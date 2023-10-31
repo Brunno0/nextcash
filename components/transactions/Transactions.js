@@ -28,7 +28,7 @@ const Transactions = ({ user }) => {
           value: 75.0,
           created_at: '2023-10-28 14:15:00',
         },
-        // Adicione mais transações conforme necessário
+    
       ];
 
 
@@ -49,8 +49,8 @@ const Transactions = ({ user }) => {
             <div className={styles.card}>
 
             {transitionsDataMock.map(
-                (transaction) => {
-                        return <TransitionsList transaction={transaction}/>}
+                (transaction,index) => {
+                        return <TransitionsList transaction={transaction} key={index}/>}
                     )}
 
                          </div>

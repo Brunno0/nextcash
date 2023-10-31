@@ -4,7 +4,7 @@
     background-color: #e7eef3;
     border-radius: 10px;
     padding: 10px;
- 
+    
   }
   
   .card {
@@ -27,8 +27,8 @@
   
   .box {
     width: 100%;
-    margin: 0 0 1rem 0;
     font-size: 1.1rem;
+    height: auto;
   }
   
   .logo {

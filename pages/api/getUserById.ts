@@ -20,9 +20,8 @@ new UserController(
           new AccountDataBase(),
           new TokenManager())
        )); 
-
-const login = (req: NextApiRequest, res: NextApiResponse) => {
-    userController.login(req, res);
+const getUserById = (req: NextApiRequest, res: NextApiResponse) => {
+    userController.getUserById(req, res);
  };
 
-export default login;
+export default getUserById;

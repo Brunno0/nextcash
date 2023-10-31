@@ -3,13 +3,8 @@ import React, { useState } from 'react';
 import { FaExchangeAlt, FaEyeSlash, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import styles from './transactions.module.css';
 
-const TransactionsList = ({ transaction, user }) => {
-    console.log(transaction)
-    
+const TransactionsList = ({ transaction, user }) => {  
     return (
-      
-        
-      
                 <div className={styles.box}>
                     <FaLongArrowAltLeft />
                     <br></br>

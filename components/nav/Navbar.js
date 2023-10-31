@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import styles from './navbar.module.css';
 import { FaExchangeAlt, FaRegBell, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 const Navbar = ({ user }) => {
-    const userName = user.name.split(' ')
+    const userName = user && user.name ? user.name.split(' ') : [''];
+    const router = useRouter()
+
+    const logout = () =>{
+        localStorage.removeItem('token')
+        router.push('/login')        
+    }
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.containerNav}>
@@ -25,13 +33,14 @@ const Navbar = ({ user }) => {
                             <span className={styles.icon} role="img" aria-label="Settings"><FaRegBell size={'20px'} /></span>
                         </span>
                     </Link>
-                    <Link href="/settings">
+                    
                         <span className={styles.navLink}>
-                            <span className={styles.icon} role="img" aria-label="Settings"><button>
+                            <span className={styles.icon} role="img" aria-label="Logout">
+                                <button onClick={()=>{logout()}}>
                                 <FaSignOutAlt /> Sair
                             </button></span>
                         </span>
-                    </Link>
+
                 </div>
             </div>
         </nav>

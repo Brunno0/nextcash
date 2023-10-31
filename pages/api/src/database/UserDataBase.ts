@@ -1,4 +1,4 @@
-import { AccountOutputDTO } from "../dtos/account.dto";
+
 import { UserDB } from "../models/UserModel";
 import { BaseDatabase } from "./BaseDataBase";
 
@@ -29,4 +29,13 @@ export class UserDatabase extends BaseDatabase {
     await BaseDatabase.connection(UserDatabase.TABLE_USERS).select() 
     return users 
   }
-}
+
+  public getUserById =async(
+    id:string
+    ):Promise<UserDB| undefined> => {
+    const [user] = 
+    await BaseDatabase.connection(UserDatabase.TABLE_USERS).select().where({id}) 
+    return user as UserDB | undefined
+  }
+
+  }

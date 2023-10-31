@@ -4,19 +4,22 @@ import { HashManager } from './src/services/HashManager';
 import { UserDatabase } from './src/database/UserDataBase';
 import UserBusiness from './src/business/UserBusiness';
 import UserController from './src/controller/UserController';
+import AccountBusiness from './src/business/AccountBusiness';
 import { TokenManager } from './src/services/TokenManager';
 import { AccountDataBase } from './src/database/AccountDataBase';
 
-const userController = new UserController(
+const userController = 
+new UserController(
   new UserBusiness(
     new UserDatabase(),
     new IdGenerator(),
     new HashManager(),
-    new TokenManager(), 
-    new AccountDataBase()
-  )
-);
-//simulando router
+    new TokenManager(),
+     new AccountBusiness(
+      new AccountDataBase(),
+      new TokenManager())
+   )); 
+
 const users = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === 'GET') {

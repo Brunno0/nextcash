@@ -1,5 +1,5 @@
 import { UserDatabase } from '../database/UserDataBase';
-import {  GetUsersInputDTO, GetUsersOutputDTO } from '../dtos/getUsers.dto';
+import {  GetUserByIdOutputDTO, GetUsersInputDTO, GetUsersOutputDTO } from '../dtos/getUsers.dto';
 import { LoginUserInputDTO, LoginUserOutputDTO } from '../dtos/login.dto';
 import { SignupInputDTO, SignupOutputDTO } from '../dtos/signup.dto';
 import { BadRequestError } from '../errors/BadRequestError';
@@ -9,8 +9,9 @@ import UserModel, { USER_ROLES, UserDB } from '../models/UserModel';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
 import { TokenManager } from '../services/TokenManager';
-import  {AccountDataBase} from '../database/AccountDataBase'
-import { AccountOutputDTO } from '../dtos/account.dto';
+import  AccountBusiness from '../business/AccountBusiness'
+import { UnauthorizedError } from '../errors/UnauthorizedError';
+
 
 export default class UserBusiness {
   constructor(
@@ -18,7 +19,7 @@ export default class UserBusiness {
     private idGenerator: IdGenerator,
     private hashManager : HashManager,
     private tokenManager: TokenManager,
-    private accountDataBase: AccountDataBase
+    private accountBusiness: AccountBusiness
     ) {}
 
   public signup = async (
@@ -54,6 +55,7 @@ export default class UserBusiness {
         role:user.getRole()
       }
 
+      await this.accountBusiness.createAccount(payload.id)
       const token = this.tokenManager.createToken(payload)
 
       const output:SignupOutputDTO = {
@@ -130,18 +132,36 @@ public login = async(
       }  
     return output
 }
-public createAccount = async (
-  input: SignupInputDTO):Promise<void>   => {
 
-    const {email} = input
-    const userDB = await this.userDataBase.findUserByEmail(email)
-    if (!userDB) {
-      throw new Error('Usuário não cadastrado, consulte servidor')
-    }    
-    const accountData :AccountOutputDTO = {
-      id : userDB.id,
-      balance : 20
-    }
-   await this.accountDataBase.createAccount(accountData)
+public getUserById = async (
+  input: GetUsersInputDTO
+  ):Promise<GetUserByIdOutputDTO> => {
+
+  const { token } = input;
+  const tokenPayload = this.tokenManager.getPayload(token);
+  if (!tokenPayload) {
+    throw new UnauthorizedError("Acesso negado");
+  }
+  const userDB: UserDB | undefined = await this.userDataBase.getUserById(tokenPayload.id);
+
+  if (!userDB){
+    throw new BadRequestError()
+  }
+
+    const user = new User(
+      userDB.id, 
+      userDB.name,
+      userDB.email,
+      userDB.password,
+      userDB.role,
+      userDB.created_at)
+    
+  const output: GetUserByIdOutputDTO = {
+      user: user,
+  };
+
+  return output;
 }
+
+
 }
