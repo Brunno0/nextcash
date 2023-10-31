@@ -64,10 +64,10 @@ h6 {
 
 /* Text and paragraph styles */
 p, span, div {
-  font-family: 'Noto Sans';
+  font-family: 'Inter';
   font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  line-height: 1.0;
+  margin-bottom: 0.4rem;
 }
 
 /* Text shadow for headings and text elements */

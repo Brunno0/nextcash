@@ -1,0 +1,60 @@
+/* transactions.module.css */
+
+.cardcontainer {
+  background-color: #e7eef3;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  height: 70vh;
+}
+
+.card {
+  padding: 1rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  color: hsla(240, 7%, 97%, 1);
+  max-width: 400px;
+  background-color: #022244;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.transactions {
+  margin-top: 1rem;
+}
+
+.transaction {
+  background-color: #ffffff0a;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction p {
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+}
+
+.titlebox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.title {
+  margin-left: 0.5rem;
+  color: #022244;
+}
+
+.icon {
+  margin-right: 1em;
+}

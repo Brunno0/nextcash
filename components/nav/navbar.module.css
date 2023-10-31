@@ -1,30 +1,64 @@
 .navbar {
-    background-color: #022244;
     color: #fff;
     display: flex;
+    padding: 0px;
+    width: 100%;
+    background-color: #022244;
     align-items: center;
-    padding: 10px;
+    justify-content: center;
+    
   }
   
-  .navbar ul {
+  .containerNav {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    align-content: center;
+    padding: 15px 15px 0;
+ 
+  }
+  
+  .userIcon {
+    display: flex;
+    align-items: center;
+    width: 40%;
+ 
+}
+ 
+.userName {
+    margin-top: 10px;
+}
+
+
+  .iconUser {
+    display: flex;
+    border-radius: 50%;
+    color: #0561bc;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .navList {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
+    gap: 20px;
+
   }
   
-  .navbar li {
-    margin: 10px;
-  }
-  
-  .navbar a {
+  .navLink {
     text-decoration: none;
     color: #fff;
     display: flex;
-    align-items: center;
+    margin: 0 ; /* Espaçamento entre os botões */
+    
   }
   
-  .navbar a .icon {
-    margin-right: 5px;
+  .navLink .icon {
+    margin-right: 3px; /* Espaçamento entre o ícone e o texto do botão */
   }
-  

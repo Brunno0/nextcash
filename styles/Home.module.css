@@ -1,68 +1,11 @@
-/* Estilos base */
 .background {
   padding: 0 0.7rem;
-  width: 100%; /* Alterado para ocupar 100% da largura da tela */
-  background: linear-gradient(#022244, #e7eef3);
-  
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: none;
-  border-radius: 10px;
-  color: #9ec9ed;
-  max-width: 400px;
-  background-color: #022244;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-.box{
-   width: 100%;
-  margin: 0 0 1rem 0;
-  font-size: 1.1rem;
-}
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-  color: #022244;
-}
-
-.cardcontainer {
-  background-color: #e7eef3;
-  min-height: 90vh; 
-  border-radius: 10px;
-  padding: 20px;
   width: 100%;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card, .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #022244 30%,
+    #e7eef3 70%,
+    #e7eef3 100%
+  );
 }

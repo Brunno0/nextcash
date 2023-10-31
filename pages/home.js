@@ -1,42 +1,26 @@
 import Navbar from '../components/nav/Navbar';
+import CardHome from '../components/cardHome/CardHome'; // Importe o componente CardHome
+//import Footer from '../components/Footer'; // Supondo que você tenha um componente Footer
 import styles from '../styles/Home.module.css';
 import { useProtectPage } from '../hooks/useProtectPage';
-import { useState } from 'react';
-import { FaEyeSlash } from 'react-icons/fa';
+import Transactions from '../components/transitions/Transactions';
 
 export default function Home() {
   useProtectPage();
 
-  const [balanceVisible, setBalanceVisible] = useState(false);
-
-  const toggleBalance = () => {
-    setBalanceVisible(!balanceVisible);
-  }
-
   const dataMock = {
-    account: "Conta do usuário",
+    account: "nx: 50423-1",
     name: "Astrovengo Malabares",
     balance: 20,
   };
 
   return (
-    <>  <Navbar />
-    <div className={styles.background}>
-       <div className={styles.cardcontainer}>
-        <h1 className={styles.logo}>NextBank</h1>
-        <div className={styles.card}>
-          <p>{dataMock.name}</p>
-          <div className={styles.box}>
-           💰 Saldo R$: {balanceVisible ? + dataMock.balance : (
-              <span onClick={toggleBalance} style={{ cursor: 'pointer' }}>
-                <FaEyeSlash />
-              </span>
-            )}
-         </div>
-        </div>
+    <>
+      <Navbar user={dataMock} />
+      <div className={styles.background}>
+        <CardHome user={dataMock} />
+        <Transactions user={dataMock} />
       </div>
-      </div>
-  
     </>
   );
 }
