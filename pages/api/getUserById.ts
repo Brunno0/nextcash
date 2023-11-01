@@ -11,17 +11,17 @@ import { AccountDataBase } from './src/database/AccountDataBase';
 const userController = 
 new UserController(
 
-  new UserBusiness(
-    new UserDatabase(),
-    new IdGenerator(),
-    new HashManager(),
-    new TokenManager(),
-     new AccountBusiness(
-      new AccountDataBase(),
-      new TokenManager())
-   )); 
-    const signup = (req: NextApiRequest, res: NextApiResponse) => {
-        userController.signup(req, res);
-      };
-      
-export default signup; 
+    new UserBusiness(
+        new UserDatabase(),
+        new IdGenerator(),
+        new HashManager(),
+        new TokenManager(),
+         new AccountBusiness(
+          new AccountDataBase(),
+          new TokenManager())
+       )); 
+const getUserById = (req: NextApiRequest, res: NextApiResponse) => {
+    userController.getUserById(req, res);
+ };
+
+export default getUserById;

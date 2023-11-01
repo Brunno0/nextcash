@@ -29,4 +29,12 @@ export class UserDatabase extends BaseDatabase {
     return users 
   }
 
-}
+  public getUserById =async(
+    id:string
+    ):Promise<UserDB| undefined> => {
+    const [user] = 
+    await BaseDatabase.connection(UserDatabase.TABLE_USERS).select().where({id}) 
+    return user as UserDB | undefined
+  }
+
+  }
