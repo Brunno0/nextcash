@@ -1,6 +1,8 @@
-import '../styles/globals.css'
-import { AppProps } from 'next/app'
+import { GlobalState } from '../context/GlobalState';
+import '../styles/globals.css';
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <GlobalState>
+   <Component {...pageProps} />
+    </GlobalState>
 }

@@ -1,9 +1,12 @@
-html,
-body {
+/* Reset some default styles */
+html, body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* Font stack similar to Notion */
+html, body {
+  font-family: 'Inter', 'Noto Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   color: black;
 }
 
@@ -16,11 +19,63 @@ a {
   box-sizing: border-box;
 }
 
+/* Dark mode styles */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-       background: black;
+    background: black;
   }
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter';
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+h6 {
+  font-size: 10px;
+}
+
+/* Text and paragraph styles */
+p, span, div {
+  font-family: 'Inter';
+  font-size: 14px;
+  line-height: 1.0;
+  margin-bottom: 0.4rem;
+}
+
+/* Text shadow for headings and text elements */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
+  /* Adicione outras variações da fonte (negrito, itálico, etc.) conforme necessário */
 }

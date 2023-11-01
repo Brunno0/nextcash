@@ -2,11 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ZodError } from "zod";
 import { BaseError } from '../errors/BaseError';
 import UserBusiness from '../business/UserBusiness';
+
 import { GetUsersSchema } from '../dtos/getUsers.dto';
 import { SignupSchema } from '../dtos/signup.dto';
+import { LoginUserShema } from '../dtos/login.dto';
 
 export default class UserController {
-  constructor(private userBusiness: UserBusiness) { }
+  constructor(
+    private userBusiness: UserBusiness) { }
 
   public signup = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -17,24 +20,23 @@ export default class UserController {
       });
 
       const output = await this.userBusiness.signup(input);
-      res.status(201).send({ token: output });
+      res.status(201).send(output);
 
     } catch (error: any) {
 
       if (error instanceof ZodError) {
-        res.status(400).send(error.issues);
-      } else if (error instanceof BaseError) {
-        console.log(error.message)
-        res.status(error.statusCode).json({
-          error:error.message,
-          details: error.message 
+        return res.status(400).send({
+          error: error.issues[0].message,
+          statusCode: 400
         })
+      } else if (error instanceof BaseError) {
+        return res.status(error.statusCode).json({ error: error.message })
       } else {
 
-        res.status(500).json({ 
-            error: 'Internal error', 
-            details: error.message 
-          });
+        return res.status(500).json({
+          error: 'Internal error',
+          details: error.message
+        });
       }
     }
 
@@ -47,7 +49,7 @@ export default class UserController {
       });
 
       const output = await this.userBusiness.getUsers(input);
-      res.status(201).send( output );
+      res.status(201).send(output);
 
     } catch (error: any) {
 
@@ -56,17 +58,82 @@ export default class UserController {
       } else if (error instanceof BaseError) {
         console.log(error.message)
         res.status(error.statusCode).json({
-          error:error.message,
-          details: error.message 
+          error: error.message,
+          details: error.message
         })
       } else {
 
-        res.status(500).json({ 
-            error: 'Internal error', 
-            details: error.message 
-          });
+        res.status(500).json({
+          error: 'Internal error',
+          details: error.message
+        });
       }
     }
 
   }
+
+  public login = async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+
+      const input = LoginUserShema.parse({
+        email: req.body.email as string,
+        password: req.body.password as string
+      })
+
+      const output = await this.userBusiness.login(input)
+
+      res.status(200).json(output)
+
+    } catch (error: any) {
+
+      if (error instanceof ZodError) {
+        return res.status(400).send({
+          error: error.issues[0].message,
+          statusCode: 400
+        })
+      } else if (error instanceof BaseError) {
+        return res.status(error.statusCode).json({ error: error.message })
+      } else {
+
+        return res.status(500).json({
+          error: 'Internal error',
+          details: error.message
+        });
+      }
+    }
+
+  }
+
+  public getUserById = async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+      const input = GetUsersSchema.parse({
+        token: req.headers.authorization
+      });
+
+      const output = await this.userBusiness.getUserById(input);
+      res.status(201).send(output);
+
+    } catch (error: any) {
+
+      if (error instanceof ZodError) {
+        res.status(400).send(error.issues);
+
+      } else if (error instanceof BaseError) {
+        
+        console.log(error.message)
+        res.status(error.statusCode).json({
+          error: error.message,
+          details: error.message
+        })
+      } else {
+
+        res.status(500).json({
+          error: 'Internal error',
+          details: error.message
+        });
+      }
+    }
+
+  }
+  
 }

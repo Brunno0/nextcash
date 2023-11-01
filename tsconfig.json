@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/api-client/api-client.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/api-client/api-client.js", "pages/api/auth/next-auth.js", "pages/api/auth/session.js"],
   "exclude": ["node_modules"]
 }
