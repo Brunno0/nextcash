@@ -2,20 +2,18 @@
 
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import styles from './transactions.module.css';
+import { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 
 
-const TransactionsList = ({handleTransactionClick ,transaction, icon }) => {
-
-    const formatCurrency = (value) => {
-        if (value) {
-            const formattedValue = value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            });
-            return formattedValue;
-        }
-        return '';
-    };
+const TransactionsList = ({ transaction,icon }) => {
+    
+    const context = useContext(GlobalContext)
+    const {
+        formatCurrency,
+        handleTransactionClick,
+        getNameUserByAccount,
+        formatDateTime       }= context
 
     return (
         <div className={styles.box} onClick={() => handleTransactionClick(transaction)}>
@@ -40,23 +38,24 @@ const TransactionsList = ({handleTransactionClick ,transaction, icon }) => {
             (
                 <div className={styles.transactions}>
                     <div className={styles.transaction}>
-                        <p>De:  {transaction.debitedAccountId} </p>
+                        <p>De:  {
+                            getNameUserByAccount(transaction.debitedAccountId)} </p>
                         <p>Valor: {
                             formatCurrency(transaction.value)
                             
                             }</p>
-                        <p>Data: {transaction.created_at}</p>
+                        <p>{formatDateTime(transaction.created_at)}</p>
                     </div>
                 </div>
             ) : (
                 <div className={styles.transactions}>
                     <div className={styles.transaction}>
-                        <p>Para: {transaction.creditedAccountId}</p>
+                        <p>Para: {getNameUserByAccount(transaction.creditedAccountId)}</p>
                         <p>Valor: {
                             formatCurrency(transaction.value)
                             
                             }</p>
-                        <p>Data: {transaction.created_at}</p>
+                        <p>{formatDateTime(transaction.created_at)}</p>
                     </div>
                 </div>
                 )

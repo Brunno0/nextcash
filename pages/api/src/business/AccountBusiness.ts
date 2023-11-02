@@ -3,7 +3,7 @@ import { BadRequestError } from '../errors/BadRequestError';
 
 import { TokenManager } from '../services/TokenManager';
 import  {AccountDataBase} from '../database/AccountDataBase'
-import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from '../dtos/account.dto';
+import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO, GetAccountsOutputDTO } from '../dtos/account.dto';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
 
 
@@ -45,6 +45,30 @@ public getAccountById = async (
    
   const output: GetAccountOutputDTO = {
       account: accountDB,
+  };
+
+  return output;
+}
+
+public getAccounts = async (
+  input: GetAccountInputDTO
+  ):Promise<GetAccountsOutputDTO> => {
+
+  const { token } = input;
+
+  const tokenPayload = this.tokenManager.getPayload(token);
+  if (!tokenPayload) {
+    throw new UnauthorizedError("Acesso negado");
+  }
+
+  const accountsDB: AccountDto[] | undefined = await this.accountDataBase.getAccounts();
+
+  if (!accountsDB){
+    throw new BadRequestError()
+  }
+   
+  const output: GetAccountsOutputDTO = {
+      accounts: accountsDB,
   };
 
   return output;

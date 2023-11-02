@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './transactionModal.module.css';
+import { GlobalContext } from '../../context/GlobalContext';
 
 const TransactionModal = ({ transaction, onClose }) => {
 
-
-// repitindo a funçãoooooooo
-    const formatCurrency = (value) => {
-
-        if (value) {
-            const formattedValue = value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            });
-            return formattedValue;
-        }
-        return '';
-    };
-
+  const context = useContext(GlobalContext)
+  const {
+      formatCurrency,
+      handleTransactionClick,
+      getNameUserByAccount,
+      formatDateTime       }= context
 
   return (
     <div className={styles.modalBackground}>
@@ -26,17 +19,17 @@ const TransactionModal = ({ transaction, onClose }) => {
         <p>ID da Transação: {transaction.id}</p>
         {transaction.debitedAccountId ? (
           <>
-            <p>Debited Account ID: {transaction.debitedAccountId}</p>
+            <p>Conta debitada: {transaction.debitedAccountId}</p>
             <p>Valor: { 
             formatCurrency(transaction.value)
             }</p>
-            <p>Data: {transaction.created_at}</p>
+            <p>Data: {formatDateTime(transaction.created_at)}</p>
           </>
         ) : (
           <>
             <p>Credited Account ID: {transaction.creditedAccountId}</p>
             <p>Valor: {transaction.value}</p>
-            <p>Data: {transaction.created_at}</p>
+            <p>Data: {formatDateTime(transaction.created_at)}</p>
           </>
         )}
       </div>

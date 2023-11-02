@@ -11,12 +11,13 @@ const accountBusiness = new AccountBusiness(
   new TokenManager()
 );
 
-const getAccountById = async (req: NextApiRequest, res: NextApiResponse) => {
+const getAccounts = async (req: NextApiRequest, res: NextApiResponse) => {
+   
   try {
     const input = GetUsersSchema.parse({
       token: req.headers.authorization
     });
-    const output = await accountBusiness.getAccountById(input);
+    const output = await accountBusiness.getAccounts(input);
     res.status(200).json(output); 
 
   } catch (error: any) {
@@ -39,10 +40,6 @@ const getAccountById = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   }
-
-
-
-  
 };
 
-export default getAccountById;
+export default getAccounts;

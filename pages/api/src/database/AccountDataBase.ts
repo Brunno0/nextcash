@@ -23,5 +23,23 @@ export class AccountDataBase extends BaseDatabase {
   
     return account as AccountDto | undefined;
   }
+
+  public getAccounts = async (): Promise<AccountDto[] | undefined> => {
+    const accounts = await BaseDatabase.connection
+      .select('*')
+      .from(AccountDataBase.TABLE_ACCOUNTS);
+  
+    return accounts as AccountDto[] | undefined;
+  }
+
+  public getNameBy = async (): Promise<AccountDto[] | undefined> => {
+    const accounts = await BaseDatabase.connection
+      .select('accounts.*', 'users.name as userName') 
+      .from(AccountDataBase.TABLE_ACCOUNTS)
+      .leftJoin('users', 'accounts.userId', 'users.id'); 
+  
+    return accounts as AccountDto[] | undefined;
+  }
+  
   
 }

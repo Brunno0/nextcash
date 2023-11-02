@@ -58,7 +58,7 @@ export async function login(data) {
 
 
 
-export async function getAccountById(token) {
+export async function getAccountByUserId(token) {
   try {
     const response = await fetch(`/api/getAccountById`, {
       method: 'GET',
@@ -119,3 +119,22 @@ export async function getTransactionsById(token, accountId) {
   }
 }
 
+export async function getAccounts(token) {
+  try {
+    const response = await fetch(`/api/getAccounts`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
+    }
+
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}

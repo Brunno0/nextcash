@@ -12,3 +12,7 @@ export interface AccountDto {
 export interface GetAccountOutputDTO {
   account : AccountDto
 }
+
+export interface GetAccountsOutputDTO {
+  accounts : AccountDto[]
+}

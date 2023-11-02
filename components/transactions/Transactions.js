@@ -1,49 +1,36 @@
 // CardHome.js
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styles from './transactions.module.css';
 import TransactionsList from './TransactionsList';
 import TransactionModal from '../transactionModal/TransactionModal';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const Transactions = ({ account, transactions }) => {
+const Transactions = () => {
 
-  const [balanceVisible, setBalanceVisible] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const context = useContext(GlobalContext)
+  const {
+  
+    account,
+    transactions,
+    selectedTransaction,
+    closeModal
+   }= context
 
-  const handleTransactionClick = (transaction) => {
-    setSelectedTransaction(transaction);
-  };
-
-  const closeModal = () => {
-    setSelectedTransaction(null);
-  };
-  const toggleBalance = (balanceVisible) => {
-    setBalanceVisible(!balanceVisible);
-  };
-
-  const debitedTransactions = transactions.filter(
-    (transaction) => transaction.debitedAccountId === account.id
-  );
-
-  const creditedTransactions = transactions.filter(
-    (transaction) => transaction.creditedAccountId === account.id
-  );
-
+ 
   const coe = transactions.map(
     (transaction, index) => {
       if (transaction.debitedAccountId === account.id) {
         return (
           <TransactionsList
-            transaction={transaction}
             key={index}
-            handleTransactionClick={handleTransactionClick}
+            transaction={transaction}
             icon={'right'}
           />)
       } else {
         return (
           <TransactionsList
-            transaction={transaction}
             key={index}
-            handleTransactionClick={handleTransactionClick}
+            transaction={transaction}
             icon={'left'} />)
       }
 

@@ -1,25 +1,20 @@
 // CardHome.js
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
 import styles from './CardHome.module.css';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const CardHome = ({ account }) => {
+const CardHome = () => {
     const [balanceVisible, setBalanceVisible] = useState(false);
     
+    const context = useContext(GlobalContext)
+    const {formatCurrency, account} = context
+
     const toggleBalance = (balanceVisible) => {
         setBalanceVisible(!balanceVisible);
     };
 
-     const formatCurrency = (value) => {
-        if (value) {
-            const formattedValue = value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            });
-            return formattedValue;
-        }
-        return '';
-    };
+    
 
     return (
         <div className={styles.cardcontainer}>
@@ -29,7 +24,7 @@ const CardHome = ({ account }) => {
             <div className={styles.card}>
                 <div className={styles.box}>
                     💰 Saldo: {balanceVisible ?
-                        formatCurrency(account && account.id) :
+                        formatCurrency(account && account.balance) :
                         (
                             <span onClick={() => toggleBalance(balanceVisible)}
                                 style={{ cursor: 'pointer' }}>
