@@ -19,7 +19,6 @@ export default function Home() {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        console.log("tem token")
         const accountApiResponse = await getAccountById(token);
         setAccount( accountApiResponse.account )
       

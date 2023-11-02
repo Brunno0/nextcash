@@ -5,7 +5,6 @@ import styles from './CardHome.module.css';
 
 const CardHome = ({ account }) => {
     const [balanceVisible, setBalanceVisible] = useState(false);
-    console.log(account)
     
     const toggleBalance = (balanceVisible) => {
         setBalanceVisible(!balanceVisible);
@@ -25,12 +24,12 @@ const CardHome = ({ account }) => {
     return (
         <div className={styles.cardcontainer}>
             <p className={styles.logo}>
-                <strong>Conta: {account.id} </strong>
+                <strong>Conta: {account && account.id} </strong>
             </p>
             <div className={styles.card}>
                 <div className={styles.box}>
                     💰 Saldo: {balanceVisible ?
-                        formatCurrency(account.balance) :
+                        formatCurrency(account && account.id) :
                         (
                             <span onClick={() => toggleBalance(balanceVisible)}
                                 style={{ cursor: 'pointer' }}>

@@ -1,12 +1,21 @@
 // CardHome.js
-import React, { useState } from 'react';
-import { FaExchangeAlt, FaEyeSlash, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
+
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import styles from './transactions.module.css';
-import formatCurrency from '../cardHome/CardHome';
+
 
 const TransactionsList = ({handleTransactionClick ,transaction, icon }) => {
 
-
+    const formatCurrency = (value) => {
+        if (value) {
+            const formattedValue = value.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+            return formattedValue;
+        }
+        return '';
+    };
 
     return (
         <div className={styles.box} onClick={() => handleTransactionClick(transaction)}>
@@ -43,7 +52,10 @@ const TransactionsList = ({handleTransactionClick ,transaction, icon }) => {
                 <div className={styles.transactions}>
                     <div className={styles.transaction}>
                         <p>Para: {transaction.creditedAccountId}</p>
-                        <p>Valor: {transaction.value}</p>
+                        <p>Valor: {
+                            formatCurrency(transaction.value)
+                            
+                            }</p>
                         <p>Data: {transaction.created_at}</p>
                     </div>
                 </div>

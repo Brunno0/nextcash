@@ -6,7 +6,7 @@ const TransactionModal = ({ transaction, onClose }) => {
 
 // repitindo a funçãoooooooo
     const formatCurrency = (value) => {
-        console.log(value)
+
         if (value) {
             const formattedValue = value.toLocaleString('pt-BR', {
                 style: 'currency',
