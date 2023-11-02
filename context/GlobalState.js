@@ -13,9 +13,22 @@ export const GlobalState = (props) =>{
 
     },[])
 
+
+    const formatCurrency = (value) => {
+        if (value) {
+            const formattedValue = value.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+            return formattedValue;
+        }
+        return '';
+    };
+
     const context = {
         // eachPost,
         // setEachPostId
+       // formatCurrency
     }
 
     return(

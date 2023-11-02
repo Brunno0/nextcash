@@ -1,3 +1,4 @@
+-- Active: 1689642172773@@127.0.0.1@3306
 -- Cria a tabela "users"
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -31,12 +32,31 @@ CREATE TABLE transactions (
         ON UPDATE CASCADE
 );
 
--- Remove a tabela "accounts"
+INSERT INTO transactions  (id, debitedAccountId, creditedAccountId, value)
+VALUES
+('T003', 'nxc-e6c4f4bd', 'nxc-3491feb2',10); 
+
+
+-- SELECT ************
+SELECT * FROM users;
+
+SELECT * FROM transactions;
+
+SELECT * FROM accounts;
+
+
+SELECT * FROM transactions
+WHERE debitedAccountId = 'nxc-3491feb2'
+   OR creditedAccountId = 'nxc-3491feb2';
+
+
+
+-- DROPS---------
 DROP TABLE accounts;
 
 DROP TABLE users;
 
--- Cria a tabela "accounts" com a propriedade "userId" fazendo referência à tabela "users"
+-- Cria a tabela "accounts" 
 CREATE TABLE accounts (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     balance FLOAT NOT NULL,

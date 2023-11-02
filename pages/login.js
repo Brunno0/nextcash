@@ -7,6 +7,7 @@ import useForm from "../hooks/useForm";
 import { login } from "./api/api-client/api-client";
 import { BsBank } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
+import Neon from "../components/boxNeon/neon";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -33,9 +34,10 @@ export default function LoginPage() {
 
   return (
     <div className={styles.background}>
+     
       <div className={styles.container}>
-        <div className={styles.logo}>NextCash</div>
-        <LoginCard title={"Log into your account"}>
+        <Neon/>
+            <LoginCard title={"Log into your account"}>
           <form className={styles.form} onSubmit={handleSubmit}>
             <Input
               type="email"

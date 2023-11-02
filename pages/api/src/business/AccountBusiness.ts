@@ -26,7 +26,6 @@ public createAccount = async (id:string):Promise<void>   => {
    await this.accountDataBase.createAccount(accountData)
 }
 
-
 public getAccountById = async (
   input: GetAccountInputDTO
   ):Promise<GetAccountOutputDTO> => {

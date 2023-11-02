@@ -97,3 +97,25 @@ export async function getUserById(token) {
     console.error(error.message);
   }
 }
+
+
+export async function getTransactionsById(token, accountId) {
+  try {
+    const response = await fetch(`/api/${accountId}`, { 
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} \n[${responseBody.details}]`);
+    }
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+

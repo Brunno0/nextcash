@@ -5,12 +5,13 @@ import styles from './CardHome.module.css';
 
 const CardHome = ({ account }) => {
     const [balanceVisible, setBalanceVisible] = useState(false);
+    console.log(account)
     
     const toggleBalance = (balanceVisible) => {
         setBalanceVisible(!balanceVisible);
     };
 
-    const formatCurrency = (value) => {
+     const formatCurrency = (value) => {
         if (value) {
             const formattedValue = value.toLocaleString('pt-BR', {
                 style: 'currency',

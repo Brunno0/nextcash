@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "sqlite3": "^5.1.6",
+    "threejs-toys": "^0.0.8",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "5.2.2",

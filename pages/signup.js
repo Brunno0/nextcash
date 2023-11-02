@@ -5,6 +5,7 @@ import LoginCard from '../components/loginCard/loginCard';
 import { useForm } from '../hooks/useForm'
 import { signup } from './api/api-client/api-client';
 import { useRouter } from 'next/navigation'
+import Neon from '../components/boxNeon/neon';
 
 export default function Signup() {
   const router = useRouter()
@@ -34,7 +35,12 @@ export default function Signup() {
   }
 
   return (
+
     <div className={styles.background}>
+     
+    <div className={styles.container}>
+      <Neon/>
+      
       <LoginCard title={"Sign Up"}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <Input
@@ -63,6 +69,7 @@ export default function Signup() {
           <Button type="submit">Submit</Button>
         </form>
       </LoginCard>
+    </div>
     </div>
   );
 }

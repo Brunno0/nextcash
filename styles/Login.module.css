@@ -1,5 +1,5 @@
 .background {
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(5, 118, 248, 0.608);
     display: flex;
     min-height: 100vh;
     align-items: center;
@@ -25,3 +25,4 @@
     gap: 7px;
   }
   
+  /*  */
