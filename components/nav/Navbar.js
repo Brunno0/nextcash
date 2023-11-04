@@ -4,6 +4,7 @@ import { FaExchangeAlt, FaRegBell, FaSignOutAlt, FaUserAlt } from 'react-icons/f
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
+import { FcAutomatic } from 'react-icons/fc';
 
 const Navbar = () => {
    
@@ -27,15 +28,19 @@ const Navbar = () => {
                     userName[0]}</span>
                 </div>
                 <div className={styles.navList}>
-                    <Link href="/transactions">
+                    <Link href="/transactionsPage">
                         <span className={styles.navLink}>
                             <span className={styles.icon} role="img" aria-label="Transactions"></span> <FaExchangeAlt size={'20px'} />
                         </span>
                     </Link>
-
                     <Link href="/settings">
                         <span className={styles.navLink}>
                             <span className={styles.icon} role="img" aria-label="Settings"><FaRegBell size={'20px'} /></span>
+                        </span>
+                    </Link>
+                    <Link href="/settings">
+                        <span className={styles.navLink}>
+                            <span className={styles.icon} role="img" aria-label="Settings"><FcAutomatic size={'25px'} /></span>
                         </span>
                     </Link>
                     
@@ -45,6 +50,7 @@ const Navbar = () => {
                                 <FaSignOutAlt /> Sair
                             </button></span>
                         </span>
+                        
 
                 </div>
             </div>

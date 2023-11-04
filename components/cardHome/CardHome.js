@@ -13,9 +13,6 @@ const CardHome = () => {
     const toggleBalance = (balanceVisible) => {
         setBalanceVisible(!balanceVisible);
     };
-
-    
-
     return (
         <div className={styles.cardcontainer}>
             <p className={styles.logo}>

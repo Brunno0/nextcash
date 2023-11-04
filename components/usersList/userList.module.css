@@ -1,0 +1,97 @@
+/* transactions.module.css */
+
+.cardcontainer {
+  background-color: #e7eef3;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+ 
+}
+
+.card {
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  color:#022244;
+  max-width: 400px;
+  border-radius: 10px;
+
+
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.transactions {
+  
+}
+
+.transaction {
+  background-color: #ffffff0a;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0rem 0 0 0.4em;
+}
+
+.transaction p {
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+}
+
+.titlebox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.title {
+  margin-left: 0.5rem;
+  color: #022244;
+  font-size: 12px;
+}
+
+.icon {
+  margin-right: 1em;
+  
+}
+.box{
+
+  background-color: #6c90b62e;
+  padding: 5px;
+
+}
+
+.span{
+  background: #0012120d;
+  display: flex;
+    justify-content:space-between;
+  width: 100%;
+  display: flex;
+  height: 30px;
+  border-radius: 10px 10px 0px 0px;
+  align-items: flex-end;
+}
+.emoji{
+  display: flex;
+  align-items: center;
+  margin: 0px 8px 3px 0px;
+  
+}
+.transactionId{
+  
+  display: flex;
+  align-items: center;
+    margin: 0px 0px 8px 10px;
+}
+.background {
+padding: 0 0.7rem;
+width: 100%;
+/* height: 100vh; */
+background: linear-gradient( to bottom, rgba(5, 118, 248, 0.608) 30%, #e7eef3 70%, #e7eef3 100% );
+}
