@@ -41,11 +41,11 @@ export default function Signup() {
     <div className={styles.container}>
       <Neon/>
       
-      <LoginCard title={"Sign Up"}>
+      <LoginCard title={"Cadastro"}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <Input
             type="text"
-            placeholder="your full name"
+            placeholder="Nome completo"
             name="name"
             value={form.name}
             onChange={onChange}
@@ -53,7 +53,7 @@ export default function Signup() {
 
           <Input
             type="email"
-            placeholder="enter your email"
+            placeholder="digite seu email"
             name="email"
             value={form.email}
             onChange={onChange} 
@@ -61,12 +61,12 @@ export default function Signup() {
 
           <Input
             type="password"
-            placeholder="enter your password"
+            placeholder="senha"
             name="password"
             value={form.password}
             onChange={onChange} 
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Enviar</Button>
         </form>
       </LoginCard>
     </div>

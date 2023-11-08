@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
-import styles from './makeTransactionsModal.module.css';
 import { FaTimes } from 'react-icons/fa';
 import InputValue from '../input/inputValue';
 import { createTransaction } from '../../pages/api/api-client/api-client';
 import { GlobalContext } from '../../context/GlobalContext';
+import styles from './makeTransactionsModal.module.css';
+
+const CURRENCY_SYMBOL = 'R$ ';
+const MIN_TRANSACTION_AMOUNT = 0.01;
 
 const MakeTransactionsModal = ({ userToCredited, isOpen, setModalOpen }) => {
   const [inputValue, setInputValue] = useState('0.00');
@@ -14,34 +17,40 @@ const MakeTransactionsModal = ({ userToCredited, isOpen, setModalOpen }) => {
     return null;
   }
 
+  const formatInputValue = (value) => {
+    const numericValue = parseFloat(value.replace(',', '.')) || 0;
+    const formattedValue = numericValue.toFixed(2);
+    return `${CURRENCY_SYMBOL}${formattedValue}`;
+  };
+
+  const validateTransactionValue = (value) => {
+    const numericValue = parseFloat(value.replace(CURRENCY_SYMBOL, '').replace(',', '.')) || 0;
+    return numericValue >= MIN_TRANSACTION_AMOUNT;
+  };
+
   const handleCloseModal = () => {
     setModalOpen(false);
   };
 
-  const handleBlur = () => {
-    const numericValue = parseFloat(inputValue.replace(',', '.')) || 0;
-    const formattedValue = numericValue.toFixed(2);
-    setInputValue(`R$ ${formattedValue}`);
-  };
-
   const handleChange = (event) => {
-    // Remova todos os caracteres não numéricos, exceto ',' e '.'
     const formattedValue = event.target.value.replace(/[^\d.,]/g, '');
-    setInputValue(formattedValue);
+    setInputValue(formatInputValue(formattedValue));
   };
 
   const makeTransaction = async () => {
-    const token = localStorage.getItem('token');
-    const numericValue = parseFloat(inputValue.replace('R$ ', '').replace(',', '.')) || 0;
+    const numericValue = parseFloat(inputValue.replace(CURRENCY_SYMBOL, '').replace(',', '.')) || 0;
 
-    if (numericValue < 0.01) {
+    if (!validateTransactionValue(inputValue)) {
       alert('O valor da transação deve ser maior que um centavo.');
       return;
     }
 
+    const token = localStorage.getItem('token');
     const transactionResponseApi = await createTransaction(token, userDebited.id, userToCredited.id, numericValue);
 
-    alert(transactionResponseApi.message);
+      alert(transactionResponseApi.message);
+    
+    
     handleCloseModal();
   };
 
@@ -56,7 +65,7 @@ const MakeTransactionsModal = ({ userToCredited, isOpen, setModalOpen }) => {
         </div>
         <div className={styles.modalContent}>
           <div className={styles.value}>Valor:</div>
-          <InputValue value={inputValue} onBlur={handleBlur} onChange={handleChange} />
+          <InputValue value={inputValue} onChange={handleChange} />
         </div>
         <div className={styles.modalFooter}>
           <button onClick={makeTransaction}>Enviar</button>

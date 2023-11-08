@@ -1,25 +1,23 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import { GlobalContext } from "./GlobalContext";
-import { useEffect } from "react";
-import { getAccountById, getAccountByUserId, getAccounts, getTransactionsById, getUserById, getUsers } from "../pages/api/api-client/api-client";
-
+import {
+  getAccountById,
+  getAccountByUserId,
+  getAccounts,
+  getTransactionsById,
+  getUserById,
+  getUsers
+} from "../pages/api/api-client/api-client";
 
 export const GlobalState = (props) => {
-
-
-  const [account, setAccount] = useState({})
-  const [accounts, setAccounts] = useState([])
-
-  const [user, setUser] = useState({})
-  const [users, setUsers] = useState([])
-
-  const [transactions, setTransactions] = useState([])
+  const [account, setAccount] = useState({});
+  const [accounts, setAccounts] = useState([]);
+  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
-
   const [searchTerm, setSearchTerm] = useState('');
 
-  
-  // Função para redefinir o estado quando um novo usuário faz login
   const resetState = () => {
     setAccount({});
     setAccounts([]);
@@ -31,15 +29,14 @@ export const GlobalState = (props) => {
   };
 
   useEffect(() => {
-       fetchData();
+    fetchData();
   }, []);
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        resetState(); // Redefina o estado ao carregar novos dados
-
+        resetState();
         const accountsListApiResponse = await getAccounts(token);
         setAccounts(accountsListApiResponse.accounts);
 
@@ -62,11 +59,10 @@ export const GlobalState = (props) => {
 
   const formatCurrency = (value) => {
     if (value) {
-      const formattedValue = value.toLocaleString('pt-BR', {
+      return value.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL',
       });
-      return formattedValue;
     }
     return '';
   };
@@ -88,27 +84,25 @@ export const GlobalState = (props) => {
   );
 
   const filterAccountsByUserId = (id) => {
-    const [accountFilter] = accounts && accounts.filter((account) => id === account.userId)
+  
+    const [accountFilter] = accounts && accounts.filter((account) => id === account.user_id)
     return accountFilter
   }
 
   const getNameUserByAccount = (accountId) => {
-    // Verifica se a lista de contas e a lista de usuários estão disponíveis
+
     if (accounts && users) {
-      // Encontra a conta com o ID correspondente
-      const account = accounts.find((acc) => acc.id === accountId);
-
-      // Se a conta for encontrada, encontre o usuário correspondente
+      const account = accounts.find(
+            (acc) => acc.id === accountId);
       if (account) {
-        const user = users.find((usr) => usr.id === account.userId);
-
-
+        const user = users.find(
+            (usr) => usr.id === account.user_id);
         if (user) {
           return user.name;
         }
       }
     }
-    return 'Usuário não encontrado'; // Retorna uma mensagem padrão se não encontrar o usuário
+    return 'Usuário não encontrado';
   };
 
   function formatDateTime(dateTime) {
@@ -118,11 +112,9 @@ export const GlobalState = (props) => {
     const year = date.getFullYear();
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    const formattedDateTime = `${day}-${month}-${year} às ${hours}:${minutes}`;
-
-    return formattedDateTime;
+    return `${day}-${month}-${year} às ${hours}:${minutes}`;
   }
+
 
     const context = {
     account, setAccount,

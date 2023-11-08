@@ -13,8 +13,9 @@ const TransactionsList = ({ transaction,icon }) => {
         formatCurrency,
         handleTransactionClick,
         getNameUserByAccount,
-        formatDateTime       }= context
-
+        formatDateTime       
+    }= context
+     
     return (
         <div className={styles.box} onClick={() => handleTransactionClick(transaction)}>
      
@@ -39,7 +40,7 @@ const TransactionsList = ({ transaction,icon }) => {
                 <div className={styles.transactions}>
                     <div className={styles.transaction}>
                         <p>De:  {
-                            getNameUserByAccount(transaction.debitedAccountId)} </p>
+                            getNameUserByAccount(transaction.debited_account_id)} </p>
                         <p>Valor: {
                             formatCurrency(transaction.value)
                             
@@ -50,7 +51,7 @@ const TransactionsList = ({ transaction,icon }) => {
             ) : (
                 <div className={styles.transactions}>
                     <div className={styles.transaction}>
-                        <p>Para: {getNameUserByAccount(transaction.creditedAccountId)}</p>
+                        <p>Para: {getNameUserByAccount(transaction.credited_account_id)}</p>
                         <p>Valor: {
                             formatCurrency(transaction.value)
                             

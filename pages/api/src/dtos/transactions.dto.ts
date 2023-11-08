@@ -17,6 +17,14 @@ export interface TransactionsDTO {
     createAt: string
 }
 
+export interface TransactionsDbDTO {
+  id :string,
+  debited_accountId: string,
+  credited_accountId: string
+  value:number
+  createAt: string
+}
+
 export interface TransactionOutputDTO {
   message: string
 }

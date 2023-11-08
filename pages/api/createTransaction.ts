@@ -29,14 +29,14 @@ const transactionsBusiness = new TransactionsBusiness(
       const { accountDebited, accountCredited, value} = req.body;
 
       const output = await transactionsBusiness.createTransaction(input, accountDebited, accountCredited, value);
-      console.log(output)
+
       res.status(200).json(output);
   
     } catch (error: any) {
   
       if (error instanceof ZodError) {
   
-        res.status(400).send(error.issues);
+        res.status(400).json(error.issues);
   
       } else if (error instanceof BaseError) {
   

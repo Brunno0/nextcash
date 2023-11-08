@@ -23,7 +23,7 @@ export default class UserController {
       res.status(201).send(output);
 
     } catch (error: any) {
-
+      console.log(error)
       if (error instanceof ZodError) {
         return res.status(400).send({
           error: error.issues[0].message,
@@ -111,7 +111,7 @@ export default class UserController {
       });
 
       const output = await this.userBusiness.getUserById(input);
-      res.status(201).send(output);
+      res.status(201).json(output);
 
     } catch (error: any) {
 

@@ -67,6 +67,7 @@ export async function getAccountByUserId(token, userId) {
       }
     });
     const responseBody = await response.json();
+  
     if (!response.ok) {
       throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
     }
@@ -120,7 +121,7 @@ export async function getTransactionsById(token, accountId) {
 }
 
 export async function createTransaction(token, accountDebited, accountCredited, value) {
-  console.table(token, accountDebited, accountCredited, value)
+
   try {
     const response = await fetch(`/api/createTransaction`, { 
       method: 'POST',
@@ -129,7 +130,7 @@ export async function createTransaction(token, accountDebited, accountCredited, 
         'Authorization': `${token}`
       },
       body: JSON.stringify({
-        accountDebited, accountCredited, value}) // Converte o objeto em uma string JSON
+        accountDebited, accountCredited, value}) 
     });
 
     const responseBody = await response.json();

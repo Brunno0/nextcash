@@ -16,7 +16,7 @@ const CardTransactions = () => {
             <div className={styles.card}>
                 <div className={styles.box}>
                   <IinputTransactions 
-                    placeholder="Pesquisar usuários"
+                    placeholder={"Pesquisar usuários"}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}/> 
                   <div  

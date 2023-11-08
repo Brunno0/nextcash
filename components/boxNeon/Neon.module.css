@@ -40,6 +40,9 @@
 .container h3 span:nth-child(4) {
   animation-delay: 0.75s;
 }
+.container.hidden {
+  display: none;
+}
 
 @keyframes animate {
   0%, 100% {

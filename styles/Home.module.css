@@ -1,6 +1,7 @@
 .background {
   padding: 0 0.7rem;
   width: 100%;
+  min-height: 100vh;
   background: linear-gradient(
     to bottom,
     rgba(5, 118, 248, 0.608) 30%,

@@ -3,7 +3,7 @@ import { BadRequestError } from '../errors/BadRequestError';
 
 import { TokenManager } from '../services/TokenManager';
 import  {AccountDataBase} from '../database/AccountDataBase'
-import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO, GetAccountsOutputDTO } from '../dtos/account.dto';
+import { AccountDbDTO, AccountDto, GetAccountInputDTO, GetAccountOutputDTO, GetAccountsOutputDTO } from '../dtos/account.dto';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
 
 
@@ -18,10 +18,10 @@ public createAccount = async (id:string):Promise<void>   => {
   const split = (id.split('-'))
   const accountId = 'nxc-'+ split[0]
 
-    const accountData :AccountDto = {
+    const accountData :AccountDbDTO = {
       id : accountId,
       balance : 20,
-      userId: id
+      user_id: id
     }
    await this.accountDataBase.createAccount(accountData)
 }
@@ -37,7 +37,7 @@ public getAccountById = async (
     throw new UnauthorizedError("Acesso negado");
   }
   
-  const accountDB: AccountDto | undefined = await this.accountDataBase.getAccountById(accountId);
+  const accountDB: AccountDbDTO | undefined = await this.accountDataBase.getAccountById(accountId);
   if (!accountDB){
     throw new BadRequestError()
   }
@@ -61,7 +61,7 @@ public getAccounts = async (
     throw new UnauthorizedError("Acesso negado");
   }
 
-  const accountsDB: AccountDto[] | undefined = await this.accountDataBase.getAccounts();
+  const accountsDB: AccountDbDTO[] | undefined = await this.accountDataBase.getAccounts();
 
   if (!accountsDB){
     throw new BadRequestError()

@@ -1,13 +1,13 @@
 /* components/Card.module.css */
 .card {
-    background-color: rgba(2, 29, 53, 0.837);
+    background-color: rgb(0 39 74);
     color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 400px; /* Defina um valor mínimo de largura para o .card */
-
+    
     /* Adicione um padding padrão para o .card */
     padding: 2em;
 }

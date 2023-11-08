@@ -2,6 +2,7 @@
   export interface AccountModel {
     id: string;
     balance: number;
+    userId:string
   }
   
   export default class Account {
@@ -24,11 +25,6 @@
     }
   
   
-    public toBusinessModel(): AccountModel {
-      return {
-        id: this.id,
-        balance: this.balance,
-      };
-    }
+  
   }
   

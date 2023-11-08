@@ -1,7 +1,7 @@
 export interface TransactionDB {
   id: string;
-  debitedAccountId: string;
-  creditedAccountId: string;
+  debited_account_id: string;
+  credited_account_id: string;
   value: number;
   created_at: string;
 }
@@ -38,8 +38,8 @@ export default class Transaction {
   public toDBModel(): TransactionDB {
     return {
       id: this.id,
-      debitedAccountId: this.debitedAccountId,
-      creditedAccountId: this.creditedAccountId,
+      debited_account_id: this.debitedAccountId,
+      credited_account_id: this.creditedAccountId,
       value: this.value,
       created_at: this.createdAt,
     };
@@ -48,8 +48,8 @@ export default class Transaction {
   public static fromDBModel(dbModel: TransactionDB): Transaction {
     return new Transaction(
       dbModel.id,
-      dbModel.debitedAccountId,
-      dbModel.creditedAccountId,
+      dbModel.debited_account_id,
+      dbModel.credited_account_id,
       dbModel.value,
       dbModel.created_at
     );

@@ -1,5 +1,4 @@
-import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from "../dtos/account.dto";
-import { GetTransactionsInputDTO, TransactionsDTO } from "../dtos/transactions.dto";
+import { TransactionsDTO } from "../dtos/transactions.dto";
 import Transaction from "../models/TransactionModel";
 import { BaseDatabase } from "./BaseDataBase";
 
@@ -12,8 +11,8 @@ export class TransactionsDataBase extends BaseDatabase {
     const transactions = await BaseDatabase.connection
       .select()
       .from(TransactionsDataBase.TABLE_ACCOUNTS)
-      .where('debitedAccountId', accountId)
-      .orWhere('creditedAccountId', accountId);
+      .where('debited_account_id', accountId)
+      .orWhere('credited_account_id', accountId);
    
     return transactions as TransactionsDTO[] | undefined;
   }

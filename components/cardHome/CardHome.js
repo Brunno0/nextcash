@@ -1,4 +1,3 @@
-// CardHome.js
 import React, { useContext, useState } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
 import styles from './cardHome.module.css';
@@ -8,11 +7,12 @@ const CardHome = () => {
     const [balanceVisible, setBalanceVisible] = useState(false);
     
     const context = useContext(GlobalContext)
-    const {formatCurrency, account} = context
+    const { formatCurrency, account } = context
 
-    const toggleBalance = (balanceVisible) => {
-        setBalanceVisible(!balanceVisible);
+    const toggleBalance = () => {
+        setBalanceVisible(!balanceVisible); // Inverte o valor de balanceVisible
     };
+
     return (
         <div className={styles.cardcontainer}>
             <p className={styles.logo}>
@@ -20,10 +20,11 @@ const CardHome = () => {
             </p>
             <div className={styles.card}>
                 <div className={styles.box}>
-                    💰 Saldo: {balanceVisible ?
+                    💰 Saldo: {balanceVisible ? 
+                        account.balance === 0 ? 'R$ 0,00' :
                         formatCurrency(account && account.balance) :
                         (
-                            <span onClick={() => toggleBalance(balanceVisible)}
+                            <span onClick={toggleBalance}
                                 style={{ cursor: 'pointer' }}>
                                 *** <FaEyeSlash size={'1.1em'} />
                             </span>

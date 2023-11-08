@@ -4,6 +4,7 @@ import MakeTransactionsModal from '../makeTransactionsModal/MakeTransactionsModa
 import styles from './userList.module.css';
 
 const MapedUserList = ({ user }) => {
+
   const context = useContext(GlobalContext);
   const { filterAccountsByUserId } = context;
 

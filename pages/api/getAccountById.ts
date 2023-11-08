@@ -17,17 +17,15 @@ const getAccountById = async (req: NextApiRequest, res: NextApiResponse) => {
     const input = GetUsersSchema.parse({
       token: req.headers.authorization
     });
-    const userId = req.query.userId; // Adicione esta linha para obter o userId do corpo
-   
+    const userId = req.query.userId; 
 
-    if (!userId) { // Verifique se userId foi fornecido
+    if (!userId) { 
      throw new BadRequestError('Verifique o userId')
     } 
     const output = await accountBusiness.getAccountById(input, userId as string  );
     res.status(200).json(output);
 
   } catch (error: any) {
-
     if (error instanceof ZodError) {
 
       res.status(400).send(error.issues);

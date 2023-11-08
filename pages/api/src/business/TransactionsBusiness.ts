@@ -45,7 +45,11 @@ public createTransaction = async (
     }
 
     if(accountToDebited.account.balance<value){
-     throw new BadRequestError('Saldo insuficiente')
+   
+      const output : TransactionOutputDTO ={
+        message:"Saldo insuficiente"
+      }
+      return output 
     }
 
     const id = this.idGenerator.generate()
