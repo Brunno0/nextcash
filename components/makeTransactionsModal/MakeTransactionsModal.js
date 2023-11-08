@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styles from './makeTransactionsModal.module.css';
 import { FaTimes } from 'react-icons/fa';
-import InputValue from '../input/InputValue';
+import InputValue from '../input/inputValue';
 import { createTransaction } from '../../pages/api/api-client/api-client';
 import { GlobalContext } from '../../context/GlobalContext';
 
