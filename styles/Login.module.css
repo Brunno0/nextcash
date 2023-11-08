@@ -25,7 +25,7 @@
     gap: 7px;
   }
   .background-image {
-    background-image: url('../../nextcash/public/criesuaconta.png'); /* imagem TOOP, só falta fazer */
+    background-image: url('../public/criesuaconta.png'); /* imagem TOOP, só falta fazer */
     background-size: cover;
     background-repeat: no-repeat;
   }
