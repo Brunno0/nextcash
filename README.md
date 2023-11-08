@@ -46,13 +46,14 @@ O banco de dados é composto por três tabelas principais:
 - Tabela **Accounts**:
   - `id` (chave primária)
   - `balance`
+  - `user_id`
 
 - Tabela **Transactions**:
   - `id` (chave primária)
-  - `debitedAccountId` (chave estrangeira referenciando Accounts[id])
-  - `creditedAccountId` (chave estrangeira referenciando Accounts[id])
+  - `debited_accountId` 
+  - `credited_accountId` 
   - `value`
-  - `createdAt`
+  - `created_at`
 
 ## Como Usar 🚀
 
