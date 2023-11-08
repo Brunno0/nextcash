@@ -16,12 +16,14 @@ import { AccountDataBase } from './src/database/AccountDataBase';
 
 const transactionsBusiness = new TransactionsBusiness(
   new TransactionsDataBase(),
-  new TokenManager(),
-  new AccountBusiness(
-    new AccountDataBase(),
-    new TokenManager()
-  ), 
-  new IdGenerator() 
+    new TokenManager(),
+    new AccountBusiness(
+        new AccountDataBase,
+        new TokenManager()
+    ),
+    new IdGenerator(),
+    new AccountDataBase()
+  
 );
 
 const getTransactionsById = async (req: NextApiRequest, res: NextApiResponse) => {
