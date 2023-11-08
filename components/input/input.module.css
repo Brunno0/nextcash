@@ -1,6 +1,30 @@
 .input {
-    padding: 15px 30px;
+    padding: 15px 20px;
     border: none;
-    background-color: #e7e7e7;
+    background-color: #ffffff29;
     border-radius: 10px;
+    color: hsl(0deg 0% 99.16% / 87%);
+    width: 100%;
+}
+.inputTransactions {
+    padding: 2px 4px;
+    /* border: none; */
+    background-color: hsl(240deg 7% 97% / 74%);
+    border-radius: 10px;
+    color: #022244;
+    border: solid 0.1em #022244;
+    width: 90%;
+    height: 30px;
+}
+.inputValue {
+    padding: 2px 5px;
+    /* border: none; */
+    background-color: hsl(240deg 47.13% 36.9% / 19%);
+    border-radius: 5px;
+    color: #022244;
+    /* border: solid 0.1em #022244; */
+    width: 50%;
+    margin: 5px;
+    height: 40px;
+    font-size: 14px;
 }

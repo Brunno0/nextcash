@@ -3,7 +3,7 @@ import { BadRequestError } from '../errors/BadRequestError';
 
 import { TokenManager } from '../services/TokenManager';
 import  {AccountDataBase} from '../database/AccountDataBase'
-import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from '../dtos/account.dto';
+import { AccountDbDTO, AccountDto, GetAccountInputDTO, GetAccountOutputDTO, GetAccountsOutputDTO } from '../dtos/account.dto';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
 
 
@@ -18,17 +18,16 @@ public createAccount = async (id:string):Promise<void>   => {
   const split = (id.split('-'))
   const accountId = 'nxc-'+ split[0]
 
-    const accountData :AccountDto = {
+    const accountData :AccountDbDTO = {
       id : accountId,
       balance : 20,
-      userId: id
+      user_id: id
     }
    await this.accountDataBase.createAccount(accountData)
 }
 
-
 public getAccountById = async (
-  input: GetAccountInputDTO
+  input: GetAccountInputDTO, accountId:string
   ):Promise<GetAccountOutputDTO> => {
 
   const { token } = input;
@@ -37,9 +36,8 @@ public getAccountById = async (
   if (!tokenPayload) {
     throw new UnauthorizedError("Acesso negado");
   }
-
-  const accountDB: AccountDto | undefined = await this.accountDataBase.getAccountById(tokenPayload.id);
-
+  
+  const accountDB: AccountDbDTO | undefined = await this.accountDataBase.getAccountById(accountId);
   if (!accountDB){
     throw new BadRequestError()
   }
@@ -49,5 +47,33 @@ public getAccountById = async (
   };
 
   return output;
+  }
+
+
+public getAccounts = async (
+  input: GetAccountInputDTO
+  ):Promise<GetAccountsOutputDTO> => {
+
+  const { token } = input;
+
+  const tokenPayload = this.tokenManager.getPayload(token);
+  if (!tokenPayload) {
+    throw new UnauthorizedError("Acesso negado");
+  }
+
+  const accountsDB: AccountDbDTO[] | undefined = await this.accountDataBase.getAccounts();
+
+  if (!accountsDB){
+    throw new BadRequestError()
+  }
+   
+  const output: GetAccountsOutputDTO = {
+      accounts: accountsDB,
+  };
+
+  return output;
 }
+
+
+
 }

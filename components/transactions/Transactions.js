@@ -1,61 +1,60 @@
 // CardHome.js
-import React, { useState } from 'react';
-import { FaExchangeAlt, FaEyeSlash, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import styles from './transactions.module.css';
-import TransitionsList from './TransactionsList';
+import TransactionsList from './TransactionsList';
+import TransactionModal from '../transactionModal/TransactionModal';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const Transactions = ({ user }) => {
+const Transactions = () => {
 
-    const transitionsDataMock = [
-        {
-          id: '1',
-          debitedAccountId: 'account1',
-          creditedAccountId: 'account2',
-          value: 100.0,
-          created_at: '2023-10-28 10:00:00',
-        },
-        {
-          id: '2',
-          debitedAccountId: 'account2',
-          creditedAccountId: 'account3',
-          value: 50.0,
-          created_at: '2023-10-28 11:30:00',
-        },
-        {
-          id: '3',
-          debitedAccountId: 'account1',
-          creditedAccountId: 'account3',
-          value: 75.0,
-          created_at: '2023-10-28 14:15:00',
-        },
-    
-      ];
+  const context = useContext(GlobalContext)
+  const {
+  
+    account,
+    transactions,
+    selectedTransaction,
+    closeModal
+   }= context
 
+ 
+  const coe = transactions.map(
+    (transaction, index) => {
+      if (transaction.debitedAccountId === account.id) {
+        return (
+          <TransactionsList
+            key={index}
+            transaction={transaction}
+            icon={'right'}
+          />)
+      } else {
+        return (
+          <TransactionsList
+            key={index}
+            transaction={transaction}
+            icon={'left'} />)
+      }
 
-    const [balanceVisible, setBalanceVisible] = useState(false);
+    })
 
-    const toggleBalance = (balanceVisible) => {
-        setBalanceVisible(!balanceVisible);
-    };
+  return (
+    <div className={styles.cardcontainer}>
+      <div className={styles.titlebox}>
+        <p className={styles.title}>
+          <strong> Ultimas transações </strong>
+        </p>
+        <div className={styles.icon}>
 
-    return (
-        <div className={styles.cardcontainer}>
-            <div className={styles.titlebox}>
-                <p className={styles.title}>
-                  <strong> Suas transações  </strong>  
-                    </p>
-                <div className={styles.icon}> <FaExchangeAlt size={'20px'} /> </div>
-            </div>
-            <div className={styles.card}>
-
-            {transitionsDataMock.map(
-                (transaction,index) => {
-                        return <TransitionsList transaction={transaction} key={index}/>}
-                    )}
-
-                         </div>
         </div>
-    );
-};
+      </div>
+      <div className={styles.card}>
+        {coe}
+      </div>
+      {selectedTransaction && (
+        <TransactionModal transaction={selectedTransaction} onClose={closeModal} />
+      )}
+    </div>
+  );
+}
+
 
 export default Transactions;

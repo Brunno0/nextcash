@@ -1,0 +1,58 @@
+/* components/Neon.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.span{
+
+    font-size: xx-large;
+}
+.container h3 {
+  margin: 0;
+  padding: 0;
+  color: #022244;
+  font-size: 15em;
+}
+
+.container h3 span {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  animation: animate 2s linear infinite;
+}
+
+.container h3 span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.container h3 span:nth-child(2) {
+  animation-delay: 0.40s;
+}
+
+.container h3 span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.container h3 span:nth-child(4) {
+  animation-delay: 0.75s;
+}
+.container.hidden {
+  display: none;
+}
+
+@keyframes animate {
+  0%, 100% {
+    color: #fff;
+    filter: blur(2px);
+    text-shadow: 0 0 10px #022244, 0 0 20px #00e3ff, 0 0 40px #00e3ff, 0 0 80px #00e3ff, 0 0 120px #022244;
+  }
+  5%, 95% {
+    color: #ffffff;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+}

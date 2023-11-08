@@ -10,5 +10,16 @@ export interface AccountDto {
 }
 
 export interface GetAccountOutputDTO {
-  account : AccountDto
+  account :AccountDbDTO
 }
+
+export interface GetAccountsOutputDTO {
+  accounts : AccountDbDTO[]
+}
+
+export interface AccountDbDTO {
+  id:string,
+  balance:number,
+  user_id:string
+}
+

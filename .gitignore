@@ -38,4 +38,6 @@ next-env.d.ts
 
 # Banco de Dados
 *.db
+/database.db
+
 

@@ -1,37 +1,30 @@
-// CardHome.js
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
-import styles from './CardHome.module.css';
+import styles from './cardHome.module.css';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const CardHome = ({ account }) => {
+const CardHome = () => {
     const [balanceVisible, setBalanceVisible] = useState(false);
     
-    const toggleBalance = (balanceVisible) => {
-        setBalanceVisible(!balanceVisible);
-    };
+    const context = useContext(GlobalContext)
+    const { formatCurrency, account } = context
 
-    const formatCurrency = (value) => {
-        if (value) {
-            const formattedValue = value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            });
-            return formattedValue;
-        }
-        return '';
+    const toggleBalance = () => {
+        setBalanceVisible(!balanceVisible); // Inverte o valor de balanceVisible
     };
 
     return (
         <div className={styles.cardcontainer}>
             <p className={styles.logo}>
-                <strong>Conta: {account.id} </strong>
+                <strong>Conta: {account && account.id} </strong>
             </p>
             <div className={styles.card}>
                 <div className={styles.box}>
-                    💰 Saldo: {balanceVisible ?
-                        formatCurrency(account.balance) :
+                    💰 Saldo: {balanceVisible ? 
+                        account.balance === 0 ? 'R$ 0,00' :
+                        formatCurrency(account && account.balance) :
                         (
-                            <span onClick={() => toggleBalance(balanceVisible)}
+                            <span onClick={toggleBalance}
                                 style={{ cursor: 'pointer' }}>
                                 *** <FaEyeSlash size={'1.1em'} />
                             </span>

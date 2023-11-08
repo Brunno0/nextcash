@@ -57,10 +57,9 @@ export async function login(data) {
 }
 
 
-
-export async function getAccountById(token) {
+export async function getAccountByUserId(token, userId) {
   try {
-    const response = await fetch(`/api/getAccountById`, {
+    const response = await fetch(`/api/getAccountById?userId=${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -68,6 +67,7 @@ export async function getAccountById(token) {
       }
     });
     const responseBody = await response.json();
+  
     if (!response.ok) {
       throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
     }
@@ -77,6 +77,7 @@ export async function getAccountById(token) {
     console.error(error.message);
   }
 }
+
 
 
 export async function getUserById(token) {
@@ -92,6 +93,70 @@ export async function getUserById(token) {
     if (!response.ok) {
       throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
     }
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+
+export async function getTransactionsById(token, accountId) {
+  try {
+    const response = await fetch(`/api/${accountId}`, { 
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} \n[${responseBody.details}]`);
+    }
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function createTransaction(token, accountDebited, accountCredited, value) {
+
+  try {
+    const response = await fetch(`/api/createTransaction`, { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      },
+      body: JSON.stringify({
+        accountDebited, accountCredited, value}) 
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} \n[${responseBody.details}]`);
+    }
+    return responseBody;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function getAccounts(token) {
+  try {
+    const response = await fetch(`/api/getAccounts`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    });
+    const responseBody = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request error. Status(${response.status}) ${response.statusText} [${responseBody.details}]`);
+    }
+
     return responseBody;
   } catch (error) {
     console.error(error.message);

@@ -3,7 +3,7 @@
     display: flex;
     padding: 0px;
     width: 100%;
-    background-color: #022244;
+    background-color: rgba(5, 118, 248, 0.608);
     align-items: center;
     justify-content: center;
     
@@ -15,9 +15,9 @@
     height: auto;
     justify-content: space-between;
     gap: 10px;
-    align-items: center;
+    align-items: baseline;
     align-content: center;
-    padding: 15px 15px 0;
+    padding: 9px 21px 0;
  
   }
   
@@ -61,4 +61,8 @@
   
   .navLink .icon {
     margin-right: 3px; /* Espaçamento entre o ícone e o texto do botão */
+  }
+  .exit{
+
+    
   }

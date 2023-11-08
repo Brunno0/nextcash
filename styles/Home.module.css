@@ -1,11 +1,16 @@
 .background {
   padding: 0 0.7rem;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(
     to bottom,
-    #022244 30%,
+    rgba(5, 118, 248, 0.608) 30%,
     #e7eef3 70%,
     #e7eef3 100%
   );
+}
+.loading{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(5, 118, 248, 0.608);
 }
