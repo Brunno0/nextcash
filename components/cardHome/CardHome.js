@@ -1,7 +1,7 @@
 // CardHome.js
 import React, { useContext, useState } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
-import styles from './CardHome.module.css';
+import styles from './cardHome.module.css';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const CardHome = () => {

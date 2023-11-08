@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import styles from './MakeTransactionsModal.module.css';
+import styles from './makeTransactionsModal.module.css';
 import { FaTimes } from 'react-icons/fa';
 import InputValue from '../input/InputValue';
 import { createTransaction } from '../../pages/api/api-client/api-client';
