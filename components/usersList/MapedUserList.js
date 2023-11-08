@@ -20,7 +20,7 @@ const MapedUserList = ({ user }) => {
       <p>{accountUser ? accountUser.id : 'N/A'}</p>
       <p>{user.name}</p>
       <p>{user.email}</p>
-      <MakeTransactionsModal user={user} isOpen={modalOpen} setModalOpen={setModalOpen} />
+      <MakeTransactionsModal userToCredited={user} isOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );
 };

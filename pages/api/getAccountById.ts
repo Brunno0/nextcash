@@ -5,6 +5,7 @@ import { AccountDataBase } from './src/database/AccountDataBase';
 import { GetUsersSchema } from './src/dtos/getUsers.dto';
 import { ZodError } from 'zod';
 import { BaseError } from './src/errors/BaseError';
+import { BadRequestError } from './src/errors/BadRequestError';
 
 const accountBusiness = new AccountBusiness(
   new AccountDataBase(),
@@ -16,15 +17,21 @@ const getAccountById = async (req: NextApiRequest, res: NextApiResponse) => {
     const input = GetUsersSchema.parse({
       token: req.headers.authorization
     });
-    const output = await accountBusiness.getAccountById(input);
-    res.status(200).json(output); 
+    const userId = req.query.userId; // Adicione esta linha para obter o userId do corpo
+   
+
+    if (!userId) { // Verifique se userId foi fornecido
+     throw new BadRequestError('Verifique o userId')
+    } 
+    const output = await accountBusiness.getAccountById(input, userId as string  );
+    res.status(200).json(output);
 
   } catch (error: any) {
-  
+
     if (error instanceof ZodError) {
-      
+
       res.status(400).send(error.issues);
-      
+
     } else if (error instanceof BaseError) {
 
       res.status(error.statusCode).json({
@@ -39,10 +46,5 @@ const getAccountById = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   }
-
-
-
-  
 };
-
 export default getAccountById;

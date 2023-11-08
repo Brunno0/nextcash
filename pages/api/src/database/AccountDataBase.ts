@@ -41,5 +41,10 @@ export class AccountDataBase extends BaseDatabase {
     return accounts as AccountDto[] | undefined;
   }
   
+  public updateBalance = async (idAccount: string, value: number): Promise<void> => {
+       await BaseDatabase.connection(AccountDataBase.TABLE_ACCOUNTS)
+      .where({ id: idAccount })
+      .update({ balance: value });
+  }
   
 }

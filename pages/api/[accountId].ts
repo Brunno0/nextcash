@@ -10,10 +10,18 @@ import { TransactionsDataBase } from './src/database/TransactionsDataBase';
 import { GetUsersSchema } from './src/dtos/getUsers.dto';
 import { GetTransactionsByIdInputDTO } from './src/dtos/transactions.dto';
 import { UnauthorizedError } from './src/errors/UnauthorizedError';
+import AccountBusiness from './src/business/AccountBusiness';
+import { IdGenerator } from './src/services/IdGenerator';
+import { AccountDataBase } from './src/database/AccountDataBase';
 
 const transactionsBusiness = new TransactionsBusiness(
   new TransactionsDataBase(),
-  new TokenManager()
+  new TokenManager(),
+  new AccountBusiness(
+    new AccountDataBase(),
+    new TokenManager()
+  ), 
+  new IdGenerator() 
 );
 
 const getTransactionsById = async (req: NextApiRequest, res: NextApiResponse) => {

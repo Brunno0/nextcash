@@ -27,7 +27,7 @@ public createAccount = async (id:string):Promise<void>   => {
 }
 
 public getAccountById = async (
-  input: GetAccountInputDTO
+  input: GetAccountInputDTO, accountId:string
   ):Promise<GetAccountOutputDTO> => {
 
   const { token } = input;
@@ -36,9 +36,8 @@ public getAccountById = async (
   if (!tokenPayload) {
     throw new UnauthorizedError("Acesso negado");
   }
-
-  const accountDB: AccountDto | undefined = await this.accountDataBase.getAccountById(tokenPayload.id);
-
+  
+  const accountDB: AccountDto | undefined = await this.accountDataBase.getAccountById(accountId);
   if (!accountDB){
     throw new BadRequestError()
   }
@@ -48,7 +47,8 @@ public getAccountById = async (
   };
 
   return output;
-}
+  }
+
 
 public getAccounts = async (
   input: GetAccountInputDTO
@@ -73,4 +73,7 @@ public getAccounts = async (
 
   return output;
 }
+
+
+
 }

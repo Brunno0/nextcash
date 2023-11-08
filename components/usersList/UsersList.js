@@ -4,14 +4,14 @@ import MapedUserList from './MapedUserList';
 import { GlobalContext } from '../../context/GlobalContext';
 import { FcBusinessContact } from "react-icons/fc";
 
-const UsersList = () => {
+const UsersList = ({accountID}) => {
   const context = useContext(GlobalContext);
   const { users, searchTerm } = context;
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+console.log(accountID)
   const coe = filteredUsers.map((user, index) => (
     <MapedUserList user={user} key={index} />
   ));

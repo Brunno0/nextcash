@@ -18,38 +18,47 @@ export const GlobalState = (props) => {
 
   const [searchTerm, setSearchTerm] = useState('');
 
+  
+  // Função para redefinir o estado quando um novo usuário faz login
+  const resetState = () => {
+    setAccount({});
+    setAccounts([]);
+    setUser({});
+    setUsers([]);
+    setTransactions([]);
+    setSelectedTransaction(null);
+    setSearchTerm('');
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const accountApiResponse = await getAccountByUserId(token);
-          setAccount(accountApiResponse.account)
-
-          const accountsListApiResponse = await getAccounts(token);
-          setAccounts(accountsListApiResponse.accounts)
-
-          const userApiResponse = await getUserById(token);
-          setUser(userApiResponse.user)
-
-          const getUsersApiResponse = await getUsers(token);
-          setUsers(getUsersApiResponse.users)
-
-
-          const transactionsApiResponse = await getTransactionsById(token, accountApiResponse.account.id);
-          setTransactions(transactionsApiResponse.transactions)
-
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    };
-
-    fetchData();
-
+       fetchData();
   }, []);
 
+  const fetchData = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        resetState(); // Redefina o estado ao carregar novos dados
 
+        const accountsListApiResponse = await getAccounts(token);
+        setAccounts(accountsListApiResponse.accounts);
+
+        const userApiResponse = await getUserById(token);
+        setUser(userApiResponse.user);
+
+        const accountApiResponse = await getAccountByUserId(token, userApiResponse.user.id);
+        setAccount(accountApiResponse.account);
+
+        const getUsersApiResponse = await getUsers(token);
+        setUsers(getUsersApiResponse.users);
+
+        const transactionsApiResponse = await getTransactionsById(token, accountApiResponse.account.id);
+        setTransactions(transactionsApiResponse.transactions);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   const formatCurrency = (value) => {
     if (value) {
@@ -61,7 +70,6 @@ export const GlobalState = (props) => {
     }
     return '';
   };
-
 
   const handleTransactionClick = (transaction) => {
     setSelectedTransaction(transaction);
@@ -81,11 +89,8 @@ export const GlobalState = (props) => {
 
   const filterAccountsByUserId = (id) => {
     const [accountFilter] = accounts && accounts.filter((account) => id === account.userId)
-    console.log(accountFilter)
     return accountFilter
   }
-
-
 
   const getNameUserByAccount = (accountId) => {
     // Verifica se a lista de contas e a lista de usuários estão disponíveis
@@ -137,7 +142,9 @@ export const GlobalState = (props) => {
     creditedTransactions,
     filterAccountsByUserId,
     getNameUserByAccount,
-    formatDateTime
+    formatDateTime,
+    fetchData,
+    resetState
 
   }
 

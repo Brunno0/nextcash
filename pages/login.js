@@ -8,9 +8,16 @@ import { login } from "./api/api-client/api-client";
 import { BsBank } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
 import Neon from "../components/boxNeon/neon";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const context = useContext(GlobalContext)
+  const {
+    resetState,
+  } = context
+
   const { form, onChange, cleanFields } = useForm({
     email: '',
     password: '',
@@ -22,8 +29,12 @@ export default function LoginPage() {
       const response = await login(form);
       if (response) {
         localStorage.setItem('token', response);
+
+        // Chame resetState aqui para redefinir o estado
+        resetState();
+
         cleanFields();
-        router.push(`/home`);
+        router.replace('/home');
       } else {
         console.log(response);
       }

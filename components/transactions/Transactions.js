@@ -40,7 +40,7 @@ const Transactions = () => {
     <div className={styles.cardcontainer}>
       <div className={styles.titlebox}>
         <p className={styles.title}>
-          <strong> Suas transações </strong>
+          <strong> Ultimas transações </strong>
         </p>
         <div className={styles.icon}>
 

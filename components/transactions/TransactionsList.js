@@ -17,7 +17,7 @@ const TransactionsList = ({ transaction,icon }) => {
 
     return (
         <div className={styles.box} onClick={() => handleTransactionClick(transaction)}>
-        <div className={styles.box}>
+     
 
             <span className={styles.span}>
                 <div className={styles.transactionId}>
@@ -64,7 +64,7 @@ const TransactionsList = ({ transaction,icon }) => {
 
 
         </div>
-        </div>
+       
     );
 };
 

@@ -7,9 +7,11 @@ import { useContext, useEffect, useState } from 'react';
 import { FaTruckLoading } from 'react-icons/fa';
 import { GlobalContext } from '../context/GlobalContext';
 import CardTransactions from '../components/cardTransactions/cardTransactions';
-
+import MySpinner from '../components/spinner/MySpinner';
 export default function TransactionsPage() {
   useProtectPage();
+  
+  const [isLoading, setIsLoading] = useState(true);
 
   const context = useContext(GlobalContext)
   const {
@@ -17,16 +19,32 @@ export default function TransactionsPage() {
     user,
   } = context
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <>
-     {(user && account)?  <>
+     {isLoading ?  <>
       <Navbar/>
+      < div className={styles.loading} >
+        <MySpinner /> 
+        </div>
+      <div className={styles.background}>
+      </div>
+    </>:(
+      <>
+      <Navbar/>
+    
       <div className={styles.background}>
         <CardTransactions/>
-        <UsersList/>
-      </div>
-    </>:(<FaTruckLoading/>)}
+        <UsersList accountId ={account.id}/>
+      </div></>
+    
+    
+    )}
      
     </>
   );

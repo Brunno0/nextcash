@@ -5,18 +5,65 @@ import { TokenManager } from '../services/TokenManager';
 import  {AccountDataBase} from '../database/AccountDataBase'
 import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from '../dtos/account.dto';
 import { UnauthorizedError } from '../errors/UnauthorizedError';
-import { GetTransactionsByIdInputDTO, GetTransactionsInputDTO, GetTransactionsOutputDTO, TransactionsDTO } from '../dtos/transactions.dto';
+import { GetTransactionsByIdInputDTO, GetTransactionsInputDTO, GetTransactionsOutputDTO, TransactionOutputDTO, TransactionsDTO } from '../dtos/transactions.dto';
 import { TransactionsDataBase } from '../database/TransactionsDataBase';
 import { getTransactionsById } from '../../api-client/api-client';
+import getAccountById from '../../getAccountById';
+import AccountBusiness from './AccountBusiness';
+import Transaction from '../models/TransactionModel';
+import { IdGenerator } from '../services/IdGenerator';
 
 
 export default class TransactionsBusiness {
   constructor(
     private transactionsDataBase: TransactionsDataBase,
-    private tokenManager: TokenManager
+    private tokenManager: TokenManager,
+    private accountBusiness : AccountBusiness,
+    private idGenerator: IdGenerator,
+    private accountDataBase: AccountDataBase
     ) {}
 
-public createTransaction = async (id:string):Promise<void>   => {
+public createTransaction = async (
+      input:GetAccountInputDTO,
+      accountDebited:string,
+      accountCredited:string, 
+      value:number
+    ):Promise<TransactionOutputDTO>   => {
+
+  const { token } = input;
+
+  const tokenPayload = this.tokenManager.getPayload(token);
+  if (!tokenPayload) {
+    throw new UnauthorizedError("Acesso negado");
+  }
+ 
+  const accountToDebited = await this.accountBusiness.getAccountById(input,accountDebited)
+  const accountToCredited = await this.accountBusiness.getAccountById(input,accountCredited)
+
+    if(!accountToDebited || !accountToCredited){
+      throw new Error("Erro interno, procure a administração do servidor")
+    }
+
+    if(accountToDebited.account.balance<value){
+     throw new BadRequestError('Saldo insuficiente')
+    }
+
+    const id = this.idGenerator.generate()
+    const transaction = new Transaction(
+      id,
+      accountToDebited.account.id,
+      accountToCredited.account.id,
+      value,
+      new Date().toISOString()
+    )
+      await this.transactionsDataBase.createTransaction(transaction)
+
+      const updatedBalanceDebited = accountToDebited.account.balance - value;
+      await this.accountDataBase.updateBalance(accountToDebited.account.id, updatedBalanceDebited);
+      const output : TransactionOutputDTO ={
+        message:"Transação realizada com sucesso"
+      }
+      return (output)
 
  }
 

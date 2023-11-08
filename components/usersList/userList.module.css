@@ -27,10 +27,6 @@
   font-size: 1.5rem;
 }
 
-.transactions {
-  
-}
-
 .transaction {
   background-color: #ffffff0a;
   border-radius: 5px;
@@ -63,7 +59,9 @@
 .box{
 
   background-color: #6c90b62e;
-  padding: 5px;
+  padding: 1px 0px 5px 5px;
+  border: 1px solid #6c90b60a;
+  border-radius: 5px;
 
 }
 

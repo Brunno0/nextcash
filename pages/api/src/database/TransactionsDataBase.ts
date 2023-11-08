@@ -1,5 +1,6 @@
 import { AccountDto, GetAccountInputDTO, GetAccountOutputDTO } from "../dtos/account.dto";
-import { TransactionsDTO } from "../dtos/transactions.dto";
+import { GetTransactionsInputDTO, TransactionsDTO } from "../dtos/transactions.dto";
+import Transaction from "../models/TransactionModel";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class TransactionsDataBase extends BaseDatabase {
@@ -15,6 +16,11 @@ export class TransactionsDataBase extends BaseDatabase {
       .orWhere('creditedAccountId', accountId);
    
     return transactions as TransactionsDTO[] | undefined;
+  }
+
+  public createTransaction = async (transaction:Transaction):Promise<void>=>{
+    transaction.toDBModel()
+    await BaseDatabase.connection.insert(transaction.toDBModel()).into(TransactionsDataBase.TABLE_ACCOUNTS)
   }
   
   
