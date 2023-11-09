@@ -9,19 +9,13 @@ const CURRENCY_SYMBOL = 'R$ ';
 const MIN_TRANSACTION_AMOUNT = 0.01;
 
 const MakeTransactionsModal = ({ userToCredited, isOpen, setModalOpen }) => {
-  const [inputValue, setInputValue] = useState('0.00');
+  const [inputValue, setInputValue] = useState('0,00');
   const context = useContext(GlobalContext);
   const { user: userDebited } = context;
 
   if (!isOpen) {
     return null;
   }
-
-  const formatInputValue = (value) => {
-    const numericValue = parseFloat(value.replace(',', '.')) || 0;
-    const formattedValue = numericValue.toFixed(2);
-    return `${CURRENCY_SYMBOL}${formattedValue}`;
-  };
 
   const validateTransactionValue = (value) => {
     const numericValue = parseFloat(value.replace(CURRENCY_SYMBOL, '').replace(',', '.')) || 0;
@@ -34,7 +28,7 @@ const MakeTransactionsModal = ({ userToCredited, isOpen, setModalOpen }) => {
 
   const handleChange = (event) => {
     const formattedValue = event.target.value.replace(/[^\d.,]/g, '');
-    setInputValue(formatInputValue(formattedValue));
+    setInputValue(formattedValue);
   };
 
   const makeTransaction = async () => {
