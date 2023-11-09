@@ -19,7 +19,7 @@ const Transactions = () => {
  
   const coe = transactions.map(
     (transaction, index) => {
-      if (transaction.debitedAccountId === account.id) {
+      if (transaction.debited_account_id === account.id) {
         return (
           <TransactionsList
             key={index}
