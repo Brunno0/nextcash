@@ -1,8 +1,8 @@
-# NextCash 💰 - Estudo de Desenvolvimento Full Stack com Next.js
+# NextCash 💰 - Estudo de Desenvolvimento Full Stack com Next.js 
+## Sobre o Projeto 🎥 
+[![Assista ao vídeo](https://img.youtube.com/vi/WFshaI-NmxA/0.jpg)](https://youtu.be/WFshaI-NmxA?si=TeT_ilWSO67PnEjD)
 
 Bem-vindo ao projeto NextCash! 🚀
-
-## Sobre o Projeto
 
 O NextCash é um projeto dedicado ao estudo do desenvolvimento Full Stack com base em um teste da NG.CASH. Nosso objetivo é explorar o Next.js, cobrindo tanto o desenvolvimento do lado do cliente (frontend) quanto o do servidor (backend). Apesar de suas raízes no processo seletivo da NG.CASH, o NextCash incorporou algumas alterações para atender às necessidades deste projeto. 📖
 
@@ -20,17 +20,6 @@ Neste projeto, utilizamos as seguintes tecnologias de ponta:
 
 Para entender a estrutura de dados do projeto, aqui estão as definições das entidades principais:
 
-### Usuários (Users) 👤
-
-Cada usuário é representado por uma instância da classe `User` com as seguintes propriedades:
-
-- `id` (chave primária)
-- `name`
-- `email`
-- `password`
-- `role`
-- `createdAt`
-
 ### Tabelas no Banco de Dados 📊
 
 O banco de dados é composto por três tabelas principais:
@@ -41,7 +30,7 @@ O banco de dados é composto por três tabelas principais:
   - `email`
   - `password`
   - `role`
-  - `createdAt`
+  - `created_at`
 
 - Tabela **Accounts**:
   - `id` (chave primária)
